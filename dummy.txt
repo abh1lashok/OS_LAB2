@@ -1,0 +1,560 @@
+---------------------APPS RUN-------------------
+
+mainframer.sh 'cd apps/q2_trial && make run'
+:: mainframer v2.1.0
+
+grep: /home/min/a/achary0/ec695lab2/lab2/.mainframer/config: No such file or directory
+grep: /home/min/a/achary0/ec695lab2/lab2/.mainframer/config: No such file or directory
+Sync local → remote machine...
+Sync done: took 0 seconds.
+
+Executing command on remote machine…
+
+cd apps/q2_trial && make run
+
+make[1]: Entering directory '/tmp/Khw9834gny0h4RYr/apps/q2_trial'
+cd ../../bin; dlxsim -x os.dlx.obj -a -u makeprocs.dlx.obj 3;
+dlxsim: /home/min/a/ece695x/labs/common/gcc/lib/libstdc++.so.5: no version information available (required by dlxsim)
+dlxsim: /home/min/a/ece695x/labs/common/gcc/lib/libstdc++.so.5: no version information available (required by dlxsim)
+Stack=0x1fffc8, pc starting at 0x1089c
+Got 3 arguments.
+Available memory: 0x1b47c -> 0x200000.
+Argument count is 3.
+Argument 0 is -u.
+Argument 1 is makeprocs.dlx.obj.
+Argument 2 is 3.
+calling process_create with two parameters
+all args => makeprocs.dlx.obj
+Creating 3 processes
+h_mem = 0x4 
+mc = 0x10000 
+&mc->numprocs = 0x10000
+&mc->really_important_char = 0x10004
+Circular Buffer Initiated
+&mc->cb = 0x10008
+mc->cb.head = 0
+mc->cb.tail = 0
+mc->cb.buffer = 0
+DATA[11] = 0
+PID --- 30 inside sem wait with sem->count 10
+PID --- 30 count decrement to 9
+PROD - PID 30 ---- Succesful Wait for j =  0 
+PRODUCER Process 0 created
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+CONSUMER Process 0 created
+PROD - PID 30 ---- Put 0 in cb 
+CB ---- Put 0 in 0
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+CONSUMER Process 1 created
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 29
+PROD - PID 30 ---- Successful Signal For j =  0 
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+CONSUMER Process 2 created
+CONS - PID 29 ---- Successful Wait for j =  0 
+
+PROD - PID 30 ---- RELEASED LOCK 
+DATA[11] = 0
+PID --- 26 inside sem wait with sem->count 9
+PID --- 26 count decrement to 8
+PROD - PID 26 ---- Succesful Wait for j =  0 
+PRODUCER Process 1 created
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 8
+PID --- 30 count decrement to 7
+PROD - PID 30 ---- Succesful Wait for j =  1 
+DATA[11] = 0
+PID --- 25 inside sem wait with sem->count 7
+PID --- 25 count decrement to 6
+PROD - PID 25 ---- Succesful Wait for j =  0 
+PRODUCER Process 2 created
+PID --- 31 inside sem wait with sem->count -5
+PID --- 31 is put to sleep
+CB ----  checking 0 from 0
+CB ----  Got 0 from 0
+CONS - PID 29 ---- Got 0 from cb 
+PID --- 29 inside sem signal with sem->count 6
+CONS - PID 29 ---- Successful Signal For j =  0 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 0 in cb 
+CB ---- Put 0 in 1
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  0 
+CONS - PID 28 ---- Successful Wait for j =  0 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 7
+PID --- 26 count decrement to 6
+PROD - PID 26 ---- Succesful Wait for j =  1 
+PROD - PID 30 ---- Put 1 in cb 
+CB ---- Put 1 in 2
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  1 
+CONS - PID 27 ---- Successful Wait for j =  0 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+PROD - PID 25 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 6
+PID --- 30 count decrement to 5
+PROD - PID 30 ---- Succesful Wait for j =  2 
+PROD - PID 25 ---- Put 0 in cb 
+CB ---- Put 0 in 3
+
+PID --- 25 inside sem signal with sem->count 0
+PID --- 25 Woke Up ---- 29
+PROD - PID 25 ---- Successful Signal For j =  0 
+CONS - PID 29 ---- Successful Wait for j =  1 
+
+PROD - PID 25 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 25 inside sem wait with sem->count 5
+PID --- 25 count decrement to 4
+PROD - PID 25 ---- Succesful Wait for j =  1 
+CB ----  checking 0 from 1
+CB ----  Got 0 from 1
+CONS - PID 28 ---- Got 0 from cb 
+PID --- 28 inside sem signal with sem->count 4
+CONS - PID 28 ---- Successful Signal For j =  0 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 1 in cb 
+CB ---- Put 1 in 4
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  1 
+CONS - PID 28 ---- Successful Wait for j =  1 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 5
+PID --- 26 count decrement to 4
+PROD - PID 26 ---- Succesful Wait for j =  2 
+CB ----  checking 1 from 2
+CONS - PID 27 ---- Tried to Pick Wrong Data 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PROD - PID 30 ---- Put 2 in cb 
+CB ---- Put 2 in 5
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  2 
+CONS - PID 27 ---- Successful Wait for j =  0 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 4
+PID --- 30 count decrement to 3
+PROD - PID 30 ---- Succesful Wait for j =  3 
+CB ----  checking 1 from 2
+CB ----  Got 1 from 2
+CONS - PID 29 ---- Got 1 from cb 
+PID --- 29 inside sem signal with sem->count 3
+CONS - PID 29 ---- Successful Signal For j =  1 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 25 ---- ACQUIRED LOCK 
+PROD - PID 25 ---- Put 1 in cb 
+CB ---- Put 1 in 6
+
+PID --- 25 inside sem signal with sem->count 0
+PID --- 25 Woke Up ---- 29
+PROD - PID 25 ---- Successful Signal For j =  1 
+CONS - PID 29 ---- Successful Wait for j =  2 
+
+PROD - PID 25 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 25 inside sem wait with sem->count 4
+PID --- 25 count decrement to 3
+PROD - PID 25 ---- Succesful Wait for j =  2 
+CB ----  checking 0 from 3
+CONS - PID 28 ---- Tried to Pick Wrong Data 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 2 in cb 
+CB ---- Put 2 in 7
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  2 
+CONS - PID 28 ---- Successful Wait for j =  1 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 3
+PID --- 26 count decrement to 2
+PROD - PID 26 ---- Succesful Wait for j =  3 
+CB ----  checking 0 from 3
+CB ----  Got 0 from 3
+CONS - PID 27 ---- Got 0 from cb 
+PID --- 27 inside sem signal with sem->count 2
+CONS - PID 27 ---- Successful Signal For j =  0 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PROD - PID 30 ---- Put 3 in cb 
+CB ---- Put 3 in 8
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  3 
+CONS - PID 27 ---- Successful Wait for j =  1 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 3
+PID --- 30 count decrement to 2
+PROD - PID 30 ---- Succesful Wait for j =  4 
+CB ----  checking 1 from 4
+CONS - PID 29 ---- Tried to Pick Wrong Data 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 25 ---- ACQUIRED LOCK 
+PROD - PID 25 ---- Put 2 in cb 
+CB ---- Put 2 in 9
+
+PID --- 25 inside sem signal with sem->count 0
+PID --- 25 Woke Up ---- 29
+PROD - PID 25 ---- Successful Signal For j =  2 
+CONS - PID 29 ---- Successful Wait for j =  2 
+
+PROD - PID 25 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 25 inside sem wait with sem->count 2
+PID --- 25 count decrement to 1
+PROD - PID 25 ---- Succesful Wait for j =  3 
+CB ----  checking 1 from 4
+CB ----  Got 1 from 4
+CONS - PID 28 ---- Got 1 from cb 
+PID --- 28 inside sem signal with sem->count 1
+CONS - PID 28 ---- Successful Signal For j =  1 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 3 in cb 
+CB ---- Put 3 in 0
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  3 
+CONS - PID 28 ---- Successful Wait for j =  2 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 2
+PID --- 26 count decrement to 1
+PROD - PID 26 ---- Succesful Wait for j =  4 
+CB ----  checking 2 from 5
+CONS - PID 27 ---- Tried to Pick Wrong Data 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PROD - PID 30 ---- Put 4 in cb 
+CB ---- Put 4 in 1
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  4 
+CONS - PID 27 ---- Successful Wait for j =  1 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 1
+PID --- 30 count decrement to 0
+PROD - PID 30 ---- Succesful Wait for j =  5 
+CB ----  checking 2 from 5
+CB ----  Got 2 from 5
+CONS - PID 29 ---- Got 2 from cb 
+PID --- 29 inside sem signal with sem->count 0
+CONS - PID 29 ---- Successful Signal For j =  2 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 25 ---- ACQUIRED LOCK 
+PROD - PID 25 ---- Put 3 in cb 
+CB ---- Put 3 in 2
+
+PID --- 25 inside sem signal with sem->count 0
+PID --- 25 Woke Up ---- 29
+PROD - PID 25 ---- Successful Signal For j =  3 
+CONS - PID 29 ---- Successful Wait for j =  3 
+
+PROD - PID 25 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 25 inside sem wait with sem->count 1
+PID --- 25 count decrement to 0
+PROD - PID 25 ---- Succesful Wait for j =  4 
+CB ----  checking 1 from 6
+CONS - PID 28 ---- Tried to Pick Wrong Data 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 4 in cb 
+CB ---- Put 4 in 3
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  4 
+CONS - PID 28 ---- Successful Wait for j =  2 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 0
+PID --- 26 is put to sleep
+CB ----  checking 1 from 6
+CB ----  Got 1 from 6
+CONS - PID 27 ---- Got 1 from cb 
+PID --- 27 inside sem signal with sem->count 0
+PID --- 27 Woke Up ---- 26
+CONS - PID 27 ---- Successful Signal For j =  1 
+PROD - PID 26 ---- Succesful Wait for j =  5 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PROD - PID 30 ---- Put 5 in cb 
+CB ---- Put 5 in 4
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  5 
+CONS - PID 27 ---- Successful Wait for j =  2 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 0
+PID --- 30 is put to sleep
+CB ----  checking 2 from 7
+CONS - PID 29 ---- Tried to Pick Wrong Data 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 25 ---- ACQUIRED LOCK 
+PROD - PID 25 ---- Put 4 in cb 
+CB ---- Put 4 in 5
+
+PID --- 25 inside sem signal with sem->count 0
+PID --- 25 Woke Up ---- 29
+PROD - PID 25 ---- Successful Signal For j =  4 
+CONS - PID 29 ---- Successful Wait for j =  3 
+
+PROD - PID 25 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 25 inside sem wait with sem->count 0
+PID --- 25 is put to sleep
+CB ----  checking 2 from 7
+CB ----  Got 2 from 7
+CONS - PID 28 ---- Got 2 from cb 
+PID --- 28 inside sem signal with sem->count 0
+PID --- 28 Woke Up ---- 30
+CONS - PID 28 ---- Successful Signal For j =  2 
+PROD - PID 30 ---- Succesful Wait for j =  6 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 5 in cb 
+CB ---- Put 5 in 6
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  5 
+CONS - PID 28 ---- Successful Wait for j =  3 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 0
+PID --- 26 is put to sleep
+CB ----  checking 3 from 8
+CONS - PID 27 ---- Tried to Pick Wrong Data 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+CB ----  checking 3 from 8
+CB ----  Got 3 from 8
+CONS - PID 29 ---- Got 3 from cb 
+PID --- 29 inside sem signal with sem->count 0
+PID --- 29 Woke Up ---- 25
+CONS - PID 29 ---- Successful Signal For j =  3 
+PROD - PID 25 ---- Succesful Wait for j =  5 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PROD - PID 30 ---- Put 6 in cb 
+CB ---- Put 6 in 7
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  6 
+CONS - PID 27 ---- Successful Wait for j =  2 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 0
+PID --- 30 is put to sleep
+CB ----  checking 2 from 9
+CONS - PID 28 ---- Tried to Pick Wrong Data 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 25 ---- ACQUIRED LOCK 
+PROD - PID 25 ---- Put 5 in cb 
+CB ---- Put 5 in 8
+
+PID --- 25 inside sem signal with sem->count 0
+PID --- 25 Woke Up ---- 29
+PROD - PID 25 ---- Successful Signal For j =  5 
+CONS - PID 29 ---- Successful Wait for j =  4 
+
+PROD - PID 25 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 25 inside sem wait with sem->count 0
+PID --- 25 is put to sleep
+CB ----  checking 2 from 9
+CB ----  Got 2 from 9
+CONS - PID 27 ---- Got 2 from cb 
+PID --- 27 inside sem signal with sem->count 0
+PID --- 27 Woke Up ---- 26
+CONS - PID 27 ---- Successful Signal For j =  2 
+PROD - PID 26 ---- Succesful Wait for j =  6 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+
+CONS - PID 29 ---- ACQUIRED LOCK 
+CB ----  checking 3 from 0
+CONS - PID 29 ---- Tried to Pick Wrong Data 
+
+PID --- 29 inside sem wait with sem->count 0
+PID --- 29 is put to sleep
+
+PROD - PID 26 ---- ACQUIRED LOCK 
+PROD - PID 26 ---- Put 6 in cb 
+CB ---- Put 6 in 9
+
+PID --- 26 inside sem signal with sem->count 0
+PID --- 26 Woke Up ---- 28
+PROD - PID 26 ---- Successful Signal For j =  6 
+CONS - PID 28 ---- Successful Wait for j =  3 
+
+PROD - PID 26 ---- RELEASED LOCK 
+
+CONS - PID 28 ---- ACQUIRED LOCK 
+PID --- 26 inside sem wait with sem->count 0
+PID --- 26 is put to sleep
+CB ----  checking 3 from 0
+CB ----  Got 3 from 0
+CONS - PID 28 ---- Got 3 from cb 
+PID --- 28 inside sem signal with sem->count 0
+PID --- 28 Woke Up ---- 30
+CONS - PID 28 ---- Successful Signal For j =  3 
+PROD - PID 30 ---- Succesful Wait for j =  7 
+
+PID --- 28 inside sem wait with sem->count 0
+PID --- 28 is put to sleep
+
+PROD - PID 30 ---- ACQUIRED LOCK 
+PROD - PID 30 ---- Put 7 in cb 
+CB ---- Put 7 in 0
+
+PID --- 30 inside sem signal with sem->count 0
+PID --- 30 Woke Up ---- 27
+PROD - PID 30 ---- Successful Signal For j =  7 
+CONS - PID 27 ---- Successful Wait for j =  3 
+
+PROD - PID 30 ---- RELEASED LOCK 
+
+CONS - PID 27 ---- ACQUIRED LOCK 
+PID --- 30 inside sem wait with sem->count 0
+PID --- 30 is put to sleep
+CB ----  checking 4 from 1
+CONS - PID 27 ---- Tried to Pick Wrong Data 
+
+PID --- 27 inside sem wait with sem->count 0
+PID --- 27 is put to sleep
+FATAL ERROR: no runnable processes, but there are sleeping processes waiting!
+Sleeping process 0: PID = 31
+Sleeping process 1: PID = 25
+Sleeping process 2: PID = 29
+Sleeping process 3: PID = 26
+Sleeping process 4: PID = 28
+Sleeping process 5: PID = 30
+Sleeping process 6: PID = 27
+Exiting at program request.
+Instructions executed: 33530871
+Time simulated: 33.531 secs
+Real time elapsed: 0.837 secs
+Execution rate: 40.04M simulated instructions per real second.
+make[1]: Leaving directory '/tmp/Khw9834gny0h4RYr/apps/q2_trial'
+
+Execution done: took 1 second.
+
+Sync remote → local machine…
+Sync done: took 0 seconds.
+
+Success: took 1 second.

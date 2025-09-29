@@ -1,7 +1,7 @@
 ; Linked by DLX-LD.
 ; MemSize 24576
-; Data size: 758
-; Text size: 6660
+; Data size: 790
+; Text size: 6708
 ; Stack size: 8192
 .text 0x1000
 .data 0x3000
@@ -468,21 +468,27 @@ LC23_LF0:
 .ascii "Lock Not Implemented \000"
 .align 2
 LC24_LF0:
-.ascii "producer.dlx.obj\000"
+.ascii "full_sem - %d\n\000"
 .align 2
 LC25_LF0:
-.ascii "PRODUCER Process %d created\n\000"
+.ascii "empty_sem - %d\n\000"
 .align 2
 LC26_LF0:
-.ascii "consumer.dlx.obj\000"
+.ascii "producer.dlx.obj\000"
 .align 2
 LC27_LF0:
-.ascii "CONSUMER Process %d created\n\000"
+.ascii "PRODUCER Process %d created\n\000"
 .align 2
 LC28_LF0:
-.ascii "Bad semaphore s_procs_completed (%d) in \000"
+.ascii "consumer.dlx.obj\000"
 .align 2
 LC29_LF0:
+.ascii "CONSUMER Process %d created\n\000"
+.align 2
+LC30_LF0:
+.ascii "Bad semaphore s_procs_completed (%d) in \000"
+.align 2
+LC31_LF0:
 .ascii "All other processes completed, exiting main process.\n\000"
 .text
 .align 2
@@ -694,9 +700,9 @@ L52_LF0:
 	sw	(r29),r11
 	jal	_sem_create
 	nop; not filled.
-	add	r3,r0,r1
+	add	r7,r0,r1
 	addi	r29,r29,#8
-	seqi	r1,r3,#-1
+	seqi	r1,r7,#-1
 	beqz	r1,L53_LF0
 	nop; not filled.
 	addi	r29,r29,#-8
@@ -723,9 +729,9 @@ L53_LF0:
 	sw	(r29),r11
 	jal	_sem_create
 	nop; not filled.
-	add	r7,r0,r1
+	add	r2,r0,r1
 	addi	r29,r29,#8
-	seqi	r1,r7,#-1
+	seqi	r1,r2,#-1
 	beqz	r1,L54_LF0
 	nop; not filled.
 	addi	r29,r29,#-8
@@ -749,8 +755,8 @@ L53_LF0:
 L54_LF0:
 	jal	_lock_create
 	nop; not filled.
-	add	r2,r0,r1
-	seqi	r1,r2,#-1
+	add	r3,r0,r1
+	seqi	r1,r3,#-1
 	beqz	r1,L55_LF0
 	nop; not filled.
 	addi	r29,r29,#-8
@@ -783,17 +789,29 @@ L55_LF0:
 	sw	4(r29),r5
 	jal	_ditoa
 	nop; not filled.
-	sw	(r29),r2
+	sw	(r29),r3
 	addi	r4,r30,#-56
 	sw	4(r29),r4
 	jal	_ditoa
 	nop; not filled.
-	sw	(r29),r3
+	lhi	r11,((LC24_LF0)>>16)&0xffff
+	addui	r11,r11,(LC24_LF0)&0xffff
+	sw	(r29),r11
+	sw	4(r29),r7
+	jal	_Printf
+	nop; not filled.
+	lhi	r11,((LC25_LF0)>>16)&0xffff
+	addui	r11,r11,(LC25_LF0)&0xffff
+	sw	(r29),r11
+	sw	4(r29),r2
+	jal	_Printf
+	nop; not filled.
+	sw	(r29),r7
 	addi	r3,r30,#-72
 	sw	4(r29),r3
 	jal	_ditoa
 	nop; not filled.
-	sw	(r29),r7
+	sw	(r29),r2
 	addi	r2,r30,#-88
 	sw	4(r29),r2
 	jal	_ditoa
@@ -802,8 +820,8 @@ L55_LF0:
 	addi	r29,r29,#8
 L59_LF0:
 	addi	r29,r29,#-32
-	lhi	r11,((LC24_LF0)>>16)&0xffff
-	addui	r11,r11,(LC24_LF0)&0xffff
+	lhi	r11,((LC26_LF0)>>16)&0xffff
+	addui	r11,r11,(LC26_LF0)&0xffff
 	sw	(r29),r11
 	sw	4(r29),r6
 	sw	8(r29),r5
@@ -816,8 +834,8 @@ L59_LF0:
 	nop; not filled.
 	addi	r29,r29,#32
 	addi	r29,r29,#-8
-	lhi	r11,((LC25_LF0)>>16)&0xffff
-	addui	r11,r11,(LC25_LF0)&0xffff
+	lhi	r11,((LC27_LF0)>>16)&0xffff
+	addui	r11,r11,(LC27_LF0)&0xffff
 	sw	(r29),r11
 	sw	4(r29),r7
 	jal	_Printf
@@ -837,6 +855,43 @@ L59_LF0:
 	addi	r3,r30,#-72
 	addi	r2,r30,#-88
 L64_LF0:
+	addi	r29,r29,#-32
+	lhi	r11,((LC28_LF0)>>16)&0xffff
+	addui	r11,r11,(LC28_LF0)&0xffff
+	sw	(r29),r11
+	sw	4(r29),r6
+	sw	8(r29),r5
+	sw	12(r29),r4
+	sw	16(r29),r3
+	sw	20(r29),r2
+	addi	r11,r0,#0
+	sw	24(r29),r11
+	jal	_process_create
+	nop; not filled.
+	addi	r29,r29,#32
+	addi	r29,r29,#-8
+	lhi	r11,((LC29_LF0)>>16)&0xffff
+	addui	r11,r11,(LC29_LF0)&0xffff
+	sw	(r29),r11
+	sw	4(r29),r7
+	jal	_Printf
+	nop; not filled.
+	addi	r29,r29,#8
+	addi	r7,r7,#1
+	slt	r1,r7,r8
+	bnez	r1,L64_LF0
+	nop; not filled.
+L62_LF0:
+	addi	r7,r0,#1
+	slt	r1,r7,r8
+	beqz	r1,L67_LF0
+	nop; not filled.
+	addi	r6,r30,#-24
+	addi	r5,r30,#-40
+	addi	r4,r30,#-56
+	addi	r3,r30,#-72
+	addi	r2,r30,#-88
+L69_LF0:
 	addi	r29,r29,#-32
 	lhi	r11,((LC26_LF0)>>16)&0xffff
 	addui	r11,r11,(LC26_LF0)&0xffff
@@ -861,43 +916,6 @@ L64_LF0:
 	addi	r29,r29,#8
 	addi	r7,r7,#1
 	slt	r1,r7,r8
-	bnez	r1,L64_LF0
-	nop; not filled.
-L62_LF0:
-	addi	r7,r0,#1
-	slt	r1,r7,r8
-	beqz	r1,L67_LF0
-	nop; not filled.
-	addi	r6,r30,#-24
-	addi	r5,r30,#-40
-	addi	r4,r30,#-56
-	addi	r3,r30,#-72
-	addi	r2,r30,#-88
-L69_LF0:
-	addi	r29,r29,#-32
-	lhi	r11,((LC24_LF0)>>16)&0xffff
-	addui	r11,r11,(LC24_LF0)&0xffff
-	sw	(r29),r11
-	sw	4(r29),r6
-	sw	8(r29),r5
-	sw	12(r29),r4
-	sw	16(r29),r3
-	sw	20(r29),r2
-	addi	r11,r0,#0
-	sw	24(r29),r11
-	jal	_process_create
-	nop; not filled.
-	addi	r29,r29,#32
-	addi	r29,r29,#-8
-	lhi	r11,((LC25_LF0)>>16)&0xffff
-	addui	r11,r11,(LC25_LF0)&0xffff
-	sw	(r29),r11
-	sw	4(r29),r7
-	jal	_Printf
-	nop; not filled.
-	addi	r29,r29,#8
-	addi	r7,r7,#1
-	slt	r1,r7,r8
 	bnez	r1,L69_LF0
 	nop; not filled.
 L67_LF0:
@@ -910,8 +928,8 @@ L67_LF0:
 	beqz	r1,L71_LF0
 	nop; not filled.
 	addi	r29,r29,#-8
-	lhi	r11,((LC28_LF0)>>16)&0xffff
-	addui	r11,r11,(LC28_LF0)&0xffff
+	lhi	r11,((LC30_LF0)>>16)&0xffff
+	addui	r11,r11,(LC30_LF0)&0xffff
 	sw	(r29),r11
 	sw	4(r29),r9
 	jal	_Printf
@@ -930,8 +948,8 @@ L67_LF0:
 	addi	r29,r29,#8
 L71_LF0:
 	addi	r29,r29,#-8
-	lhi	r11,((LC29_LF0)>>16)&0xffff
-	addui	r11,r11,(LC29_LF0)&0xffff
+	lhi	r11,((LC31_LF0)>>16)&0xffff
+	addui	r11,r11,(LC31_LF0)&0xffff
 	sw	(r29),r11
 	jal	_Printf
 	nop; not filled.

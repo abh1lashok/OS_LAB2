@@ -131,6 +131,10 @@ void main (int argc, char *argv[])
   ditoa(s_procs_completed, s_procs_completed_str);
   ditoa(lock, lock_str);
 
+  Printf("full_sem - %d\n", full_sem);
+  Printf("empty_sem - %d\n", empty_sem);
+  // Printf("N - %d\n", N);
+
   ditoa(full_sem, full_sem_str);
   ditoa(empty_sem, empty_sem_str);
 

@@ -1,3 +1,6 @@
+# Default trial directory (can be overridden from command line)
+TRIAL ?= q4_trial
+
 default:
 	@echo
 	@echo "---------------------OS MAKE-------------------"
@@ -6,7 +9,8 @@ default:
 	@echo
 	@echo "---------------------APPS MAKE------------------"
 	@echo
-	mainframer.sh 'cd apps/q4_trial && make'
+	mainframer.sh 'cd apps/$(TRIAL) && make'
+
 run:
 	clear
 	@echo
@@ -16,14 +20,13 @@ run:
 	@echo
 	@echo "---------------------APPS MAKE------------------"
 	@echo
-	mainframer.sh 'cd apps/q4_trial && make'
+	mainframer.sh 'cd apps/$(TRIAL) && make'
 	@echo
 	@echo "---------------------APPS RUN-------------------"
 	@echo
 # 	mainframer.sh 'cd os && make run'
-	mainframer.sh 'cd apps/q4_trial && make run'
+	mainframer.sh 'cd apps/$(TRIAL) && make run'
 
 clean:
 	mainframer.sh 'cd os && make clean'
-	mainframer.sh 'cd apps/q3_trial && make clean'
-
+	mainframer.sh 'cd apps/$(TRIAL) && make clean'

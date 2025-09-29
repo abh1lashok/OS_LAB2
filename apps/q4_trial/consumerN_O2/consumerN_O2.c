@@ -2,16 +2,16 @@
 #include "usertraps.h"
 #include "misc.h"
 #include "spawn.h"
-int min (uint32 a, uint32 b){
-    uint32 min;
-    if( a > b){
-        min = b;
-    }
-    else{
-        min = a;
-    }
-    return min;
-}
+// int min (uint32 a, uint32 b){
+//     uint32 min;
+//     if( a > b){
+//         min = b;
+//     }
+//     else{
+//         min = a;
+//     }
+//     return min;
+// }
 void main (int argc, char *argv[])
 {
   missile_code *mc;        // Used to access missile codes in shared memory page
@@ -24,6 +24,7 @@ int k;
   sem_t N;
   sem_t NO2;
   sem_t O2;
+  // Printf("IN Consumer N_O2 - %d \n",argc);
   if (argc != 7) { 
     Printf("Usage: "); Printf(argv[0]); Printf(" <handle_to_shared_memory_page> <handle_to_page_mapped_semaphore> <handle to lock>\n"); 
     Exit();
@@ -38,11 +39,14 @@ int k;
   NO2 = dstrtol(argv[5], NULL, 10);
   i = (3*N_N3);
   j = N_H2O/2;
-  while(min(i, j)){
+  k = 0;
+  while(k < min(i, j)){
         if(sem_wait(O2)) Printf("Sem_wait of O2 passed \n");
         if(sem_wait(N)) Printf("Sem_wait of N is passed \n");
         Printf("An NO2 molecule is created \n");
-        if(sem_signal(NO2)) Printf("Sem_signal of NO2 is passed \n");
+        if(sem_signal(NO2)) Printf("Sem_signal of NO2 is passed \n\n");
+        k ++;
+
   }
  
 

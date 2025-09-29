@@ -16,7 +16,7 @@
 #define NO_OF_PRODUCERS 2
 #define NO_OF_CONSUMERS 3
 #define N_N3 2
-#define N_H2O 2
+#define N_H2O 6
 
 
 
@@ -32,12 +32,11 @@ void main (int argc, char *argv[])
   sem_t s_procs_completed;        // Semaphore used to wait until all spawned processes have completed
   char h_mem_str[10];             // Used as command-line argument to pass mem_handle to new processes
   char s_procs_completed_str[10]; // Used as command-line argument to pass page_mapped handle to new processes
-  int n3 = N_N3;
-  int h2o = N_H2O;
-  char n_N3_str;
-  char n_H2O_str;
-  ditoa(n3, n_N3_str);
-  ditoa(h2o, n_H2O_str);
+  int n_N3 ;
+  int n_H2O;
+  char n_N3_str[10];
+  char n_H2O_str[10];
+
 
   // lock_t lock;
   // char lock_str[10];
@@ -57,9 +56,12 @@ void main (int argc, char *argv[])
   char NO2_str[10];
 
 
+  // n_N3 = N_N3;
+  // n_H2O = N_H2O;
 
 
-  if (argc != 3) {
+
+  if (argc != 4) {
     Printf("Usage: "); Printf(argv[0]); Printf(" <number of processes to create>\n");
     Exit();
   }
@@ -67,6 +69,17 @@ void main (int argc, char *argv[])
   // Convert string from ascii command line argument to integer number
   numprocs = dstrtol(argv[1], NULL, 10); // the "10" means base 10
   Printf("Creating %d processes\n", numprocs);
+
+  n_N3 =  dstrtol(argv[2], NULL, 10); // the "10" means base 10
+  Printf("No of N3 %d \n", n_N3);
+
+  n_H2O =  dstrtol(argv[3], NULL, 10); // the "10" means base 10
+  Printf("No of H2O %d \n", n_H2O);
+
+
+    ditoa(n_N3, n_N3_str);
+  ditoa(n_H2O, n_H2O_str);
+
 
   // Allocate space for a shared memory page, which is exactly 64KB
   // Note that it doesn't matter how much memory we actually need: we 
@@ -117,7 +130,7 @@ void main (int argc, char *argv[])
   // should be equal to the number of processes we're spawning - 1.  Once 
   // each of the processes has signaled, the semaphore should be back to
   // zero and the final sem_wait below will return.
-  if ((s_procs_completed = sem_create(-(2*numprocs-1))) == SYNC_FAIL) {
+  if ((s_procs_completed = sem_create(-(numprocs-1))) == SYNC_FAIL) {
     Printf("Bad sem_create in "); Printf(argv[0]); Printf("\n");
     Exit();
   }
@@ -131,19 +144,19 @@ void main (int argc, char *argv[])
     Printf("Sem failed"); Printf(argv[0]);
     exit();
   }
-  if ((O2 == sem_create(0)) == SYNC_FAIL){
+  if ((O2 = sem_create(0)) == SYNC_FAIL){
     Printf("Sem failed"); Printf(argv[0]);
     exit();
   }
-   if ((N == sem_create(0)) == SYNC_FAIL){
+   if ((N = sem_create(0)) == SYNC_FAIL){
     Printf("Sem failed"); Printf(argv[0]);
     exit();
   }
-   if ((N02 == sem_create(0)) == SYNC_FAIL){
+   if ((NO2 = sem_create(0)) == SYNC_FAIL){
     Printf("Sem failed"); Printf(argv[0]);
     exit();
   }
-   if ((H2O == sem_create(0)) == SYNC_FAIL){
+   if ((H2O = sem_create(0)) == SYNC_FAIL){
     Printf("Sem failed"); Printf(argv[0]);
     exit();
   }
@@ -158,27 +171,42 @@ void main (int argc, char *argv[])
   ditoa(H2O, H2O_str);
   ditoa(NO2, NO2_str);
   ditoa(O2, O2_str);
+ 
+//  Printf("Lauda O2 value\n");
+  Printf("N3 - %d\n", N3);
+  Printf("O2 - %d\n", O2);
+  Printf("N - %d\n", N);
+  Printf("NO2 - %d\n", NO2);
+  Printf("H2O - %d\n", H2O);
 
+  Printf(N3_str);
+  Printf(O2_str);
+  Printf(N_str);
+  Printf(NO2_str);
+  Printf(H2O_str);
   // Now we can create the processes.  Note that you MUST end your call to
   // process_create with a NULL argument so that the operating system
   // knows how many arguments you are sending.
 
     //
-    process_create(N3_PRODUCER_TO_RUN, n_N3_str,N3_str, s_procs_completed, NULL);
-    Printf("PRODUCER N3 Process %d created\n", i);
-
-    process_create(H2O_PRODUCER_TO_RUN, n_H2O_str,H2O_str,s_procs_completed, NULL);
-    Printf("PRODUCER H2O Process %d created\n", i);
 
     // N3 consumer
-    process_create(N3_CONSUMER_TO_RUN, n_N3_str,N3_str, N_str, s_procs_completed, NULL);
-    Printf("CONSUMER Process %d created\n", i);
+    process_create(N3_CONSUMER_TO_RUN, n_N3_str,N3_str, N_str, s_procs_completed_str, NULL);
+    Printf("CONSUMER Process %d created\n", 1);
     // H20 consumer
-    process_create(H2O_CONSUMER_TO_RUN, n_H2O_str, H2O_str, O2_str,s_procs_completed, NULL);
-    Printf("CONSUMER Process %d created\n", i);
+    process_create(H2O_CONSUMER_TO_RUN, n_H2O_str, H2O_str, O2_str,s_procs_completed_str, NULL);
+    Printf("CONSUMER Process %d created\n", 2);
+
+
+        process_create(N3_PRODUCER_TO_RUN, n_N3_str,N3_str, s_procs_completed_str, NULL);
+    Printf("PRODUCER N3 Process %d created\n", 1);
+
+    process_create(H2O_PRODUCER_TO_RUN, n_H2O_str,H2O_str,s_procs_completed_str, NULL);
+    Printf("PRODUCER H2O Process %d created\n", 2);
+
     // N and O2 consumer
-    process_create(N_O2_CONSUMER_TO_RUN, n_N3_str, n_H2O_str, N_str, O2_str, NO2_str, s_procs_completed, NULL);
-    Printf("CONSUMER Process %d created\n", i);
+    process_create(N_O2_CONSUMER_TO_RUN, n_N3_str, n_H2O_str, N_str, O2_str, NO2_str, s_procs_completed_str, NULL);
+    Printf("CONSUMER Process %d created\n", 3);
 
 
   // And finally, wait until all spawned processes have finished.

@@ -10,6 +10,8 @@ void main (int argc, char *argv[])
   uint32 N_N3;            // Handle to the shared memory page
   sem_t s_procs_completed; // Semaphore to signal the original process that we're done
   sem_t N3;
+  int i;
+  // Printf("IN Producer N3 - %d \n",argc);
   if (argc != 4) { 
     Printf("Usage: \n"); Printf(argv[0]); Printf(" <handle_to_shared_memory_page> <handle_to_page_mapped_semaphore> <handle to lock>\n"); 
     Exit();
@@ -19,11 +21,12 @@ void main (int argc, char *argv[])
   N_N3 = dstrtol(argv[1], NULL, 10); // The "10" means base 10
   s_procs_completed = dstrtol(argv[3], NULL, 10);
   N3 = dstrtol(argv[2], NULL, 10);
-  int i = 0;
+  
   while(i< N_N3 ){
-  Printf("An N3 molecule is created\n");
-  i++;
-  if(sem_signal(N3)) Printf("sem_N3 signal passed\n");
+  Printf("IN Producer N3 - An N3 molecule is created\n");
+
+  if(sem_signal(N3)) Printf("sem_N3 signal passed\n\n");
+    i++;
   }
 
   // Signal the semaphore to tell the original process that we're done

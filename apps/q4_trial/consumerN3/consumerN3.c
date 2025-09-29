@@ -14,6 +14,7 @@ int j;
 
   sem_t N3;
   sem_t N;
+  // Printf("IN Consumer N3 - %d \n",argc);
   if (argc != 5) { 
     Printf("Usage: "); Printf(argv[0]); Printf(" <handle_to_shared_memory_page> <handle_to_page_mapped_semaphore> <handle to lock>\n"); 
     Exit();
@@ -27,12 +28,11 @@ int j;
   i = 0;
   
   while(i < N_N3){
-    sem_wait(N3);
+    if (sem_wait(N3)) Printf("N3 - sem wait is passed\n");
     Printf("3 N molecules are created\n");
+    
+    for(j = 0; j < 3; j++){if(sem_signal(N)) Printf("Sem_N signal passed\n");}
     i++;
-    for(j = 0; j < 2; j++){
-    if(sem_signal(N)) Printf("Sem_N signal passed\n");
-    }
   }
  
 

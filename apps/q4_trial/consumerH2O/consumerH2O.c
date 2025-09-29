@@ -24,11 +24,11 @@ int k;
   O2 = dstrtol(argv[3], NULL, 10);
   i = 0;
   while(i < (N_H2O/2)){
-    for(k = 0; k<2; k++){
-    if(sem_wait(H2O)) Printf("Sem_wait H2O signal passed");}
+    for(k = 0; k<2; k++){ if(sem_wait(H2O)) Printf("Sem_wait H2O signal passed\n");}
     Printf("O2 molecule is created\n");
+    
+    if(sem_signal(O2) == SYNC_SUCCESS) Printf("Sem_O2 signal passed\n\n");
     i++;
-    if(sem_signal(O2)) Printf("Sem_O2 signal passed\n");
   }
  
 

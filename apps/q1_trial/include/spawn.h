@@ -10,7 +10,6 @@ typedef struct missile_code {
   int numprocs;
   char really_important_char;
   Circular_Buffer cb;
-
 } missile_code;
 
 #define PRODUCER_TO_RUN "producer.dlx.obj"

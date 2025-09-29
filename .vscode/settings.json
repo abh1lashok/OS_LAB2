@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "circularbuffer.h": "c",
-        "spawn.h": "c"
+        "spawn.h": "c",
+        "mutex": "c",
+        "condition_variable": "c"
     }
 }

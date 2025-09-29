@@ -65,9 +65,9 @@ void main (int argc, char *argv[])
     // lock_acquire(prod_cons_lock);
     if(!is_empty(cb)){
 
-      check_item_cb(&DATA[j],cb);
+      check_item_cb(&DATA[j],cb); //copyin gof data happening here to DATA[1000] from cb
       if (((j == 0)&&(DATA[j] == '0'))||
-          ((j != 0)&&((DATA[j] == DATA[j-1] + 1)||(!isxdigit(DATA[j]))))){
+          ((j != 0)&&((DATA[j] == DATA[j-1] + 1)||(!isxdigit(DATA[j]))))){     //(!isxdigit(DATA[J])) it will terminate the conusmer gracefully)
                   get_item_cb(&DATA[j],cb);
                   Printf("CONS - PID %d ---- Got %c from cb \n",Getpid(),DATA[j]);
                   j++;

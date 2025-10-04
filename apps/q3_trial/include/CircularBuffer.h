@@ -1,5 +1,5 @@
 #define C_BUFFER_SIZE 10
-
+#define STRING_SIZE 10
 typedef struct Circular_Buffer{
 
 int head;
@@ -15,7 +15,7 @@ char buffer[C_BUFFER_SIZE] ;
 int put_item_cb(char c, Circular_Buffer* buf){
   
   buf->buffer[buf->head] = c;
-  Printf("CB ---- Put %c in %d\n",c,buf->head);
+  // Printf("CB ---- Put %c in %d\n",c,buf->head);
   buf->head = (buf->head + 1)%C_BUFFER_SIZE;
   return 1;
 
@@ -25,7 +25,7 @@ int check_item_cb(char *c, Circular_Buffer* buf){
   
 
   *c = buf->buffer[buf->tail];
-  Printf("CB ----  checking %c from %d\n",*c,buf->tail);
+  // Printf("CB ----  checking %c from %d\n",*c,buf->tail);
   // buf->tail = (buf->tail + 1)%C_BUFFER_SIZE;
   
   return 1;
@@ -36,7 +36,7 @@ int get_item_cb(char *c, Circular_Buffer* buf){
   
 
   *c = buf->buffer[buf->tail];
-  Printf("CB ----  Got %c from %d\n",*c,buf->tail);
+  // Printf("CB ----  Got %c from %d\n",*c,buf->tail);
   buf->tail = (buf->tail + 1)%C_BUFFER_SIZE;
   
   return 1;

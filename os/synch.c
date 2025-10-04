@@ -105,7 +105,7 @@ int SemWait (Sem *sem) {
   if (!sem) return SYNC_FAIL;
 
   intrval = DisableIntrs ();
-  printf("PID --- %d inside sem wait with sem->count %d\n",GetCurrentPid(),sem->count);
+  // printf("PID --- %d inside sem wait with sem->count %d\n",GetCurrentPid(),sem->count);
   dbprintf ('I', "SemWait: Old interrupt value was 0x%x.\n", intrval);
   dbprintf ('s', "SemWait: Proc %d waiting on sem %d, count=%d.\n", GetCurrentPid(), (int)(sem-sems), sem->count);
   if (sem->count <= 0) {
@@ -118,14 +118,14 @@ int SemWait (Sem *sem) {
       printf("FATAL ERROR: could not insert new link into semaphore waiting queue in SemWait!\n");
       exitsim();
     }
-    printf("PID --- %d is put to sleep\n",GetCurrentPid());
+    // printf("PID --- %d is put to sleep\n",GetCurrentPid());
     ProcessSleep();
     
     // Don't decrement couter here because that's handled in SemSignal for us
   } else {
     
     sem->count--; // Decrement internal counter
-    printf("PID --- %d count decrement to %d\n",GetCurrentPid(),sem->count);
+    // printf("PID --- %d count decrement to %d\n",GetCurrentPid(),sem->count);
     dbprintf('s', "SemWait: Proc %d granted permission to continue by sem %d\n", GetCurrentPid(), (int)(sem-sems));
   }
   RestoreIntrs (intrval);
@@ -155,7 +155,7 @@ int SemSignal (Sem *sem) {
   if (!sem) return SYNC_FAIL;
 
   intrs = DisableIntrs ();
-  printf("PID --- %d inside sem signal with sem->count %d\n",GetCurrentPid(),sem->count);
+  // printf("PID --- %d inside sem signal with sem->count %d\n",GetCurrentPid(),sem->count);
   
   dbprintf ('s', "SemSignal: Process %d Signalling on sem %d, count=%d.\n", GetCurrentPid(), (int)(sem-sems), sem->count);
   // Increment internal counter before checking value
@@ -170,7 +170,7 @@ int SemSignal (Sem *sem) {
         exitsim();
       }
       dbprintf ('s', "SemSignal: Waking up PID %d.\n", (int)(GetPidFromAddress(pcb)));
-      printf("PID --- %d Woke Up ---- %d\n",GetCurrentPid(), (int)(GetPidFromAddress(pcb)));
+      // printf("PID --- %d Woke Up ---- %d\n",GetCurrentPid(), (int)(GetPidFromAddress(pcb)));
       ProcessWakeup (pcb);
       
       // Decrement counter on behalf of woken up PCB
@@ -241,7 +241,7 @@ int LockInit(Lock *l) {
 int LockAcquire(Lock *k) {
   Link	*l;
   int		intrval;
-    printf("PID --- %d is in LockAcquire\n",GetCurrentPid());
+    // printf("PID --- %d is in LockAcquire\n",GetCurrentPid());
   if (!k) return SYNC_FAIL;
 
   // Locks are atomic
@@ -266,7 +266,7 @@ int LockAcquire(Lock *k) {
       printf("FATAL ERROR: could not insert new link into lock waiting queue in LockAcquire!\n");
       exitsim();
     }
-    printf("PID --- %d is put to sleep in LockAcquire\n",GetCurrentPid());
+    // printf("PID --- %d is put to sleep in LockAcquire\n",GetCurrentPid());
     ProcessSleep();
   } else {
     dbprintf('s', "LockAcquire: lock is available, assigning to proc %d\n", GetCurrentPid());
@@ -296,22 +296,22 @@ int LockRelease(Lock *k) {
   Link *l;
   int	intrs;
   PCB *pcb;
-  printf("Lock got to Release -- %p \n",k);
+  // printf("Lock got to Release -- %p \n",k);
   if (!k) return SYNC_FAIL;
 
   intrs = DisableIntrs ();
   dbprintf ('s', "LockRelease: Proc %d releasing lock %d.\n", GetCurrentPid(), (int)(k-locks));
-  printf ("LockRelease: Proc %d releasing lock %d.\n", GetCurrentPid(), (int)(k-locks));
+  // printf ("LockRelease: Proc %d releasing lock %d.\n", GetCurrentPid(), (int)(k-locks));
 
   if (k->pid != GetCurrentPid()) {
     dbprintf('s', "LockRelease: Proc %d does not own lock %d.\n", GetCurrentPid(), (int)(k-locks));
-    printf("LockRelease: Proc %d does not own lock %d.\n", GetCurrentPid(), (int)(k-locks));
+    // printf("LockRelease: Proc %d does not own lock %d.\n", GetCurrentPid(), (int)(k-locks));
     return SYNC_FAIL;
   }
   k->pid = -1;
-  printf("PROCESS OS : %d Checking waitting process in lock queue\n",GetCurrentPid());
+  // printf("PROCESS OS : %d Checking waitting process in lock queue\n",GetCurrentPid());
   if (!AQueueEmpty(&k->waiting)) { // there is a process to wake up
-    printf("PROCESS OS : %d found waitting process in lock queue\n",GetCurrentPid());
+    // printf("PROCESS OS : %d found waitting process in lock queue\n",GetCurrentPid());
     l = AQueueFirst(&k->waiting);
     pcb = (PCB *)AQueueObject(l);
     if (AQueueRemove(&l) != QUEUE_SUCCESS) { 
@@ -319,7 +319,7 @@ int LockRelease(Lock *k) {
       exitsim();
     }
     dbprintf ('s', "LockRelease: Waking up PID %d, assigning lock.\n", (int)(GetPidFromAddress(pcb)));
-    printf ("LockRelease: Waking up PID %d, assigning lock.\n", (int)(GetPidFromAddress(pcb)));
+    // printf ("LockRelease: Waking up PID %d, assigning lock.\n", (int)(GetPidFromAddress(pcb)));
     k->pid = GetPidFromAddress(pcb);
     ProcessWakeup (pcb);
   }
@@ -399,7 +399,7 @@ cond_t CondCreate(lock_t lock) {
   cond_t i;
   int intrval = DisableIntrs();
 
-  printf("I am Creating COnditional Variable\n");
+  // printf("I am Creating COnditional Variable\n");
   for(i = 0;i < MAX_CONDS;i++){
     if(cond_vars[i].inuse == 0){
       cond_vars[i].inuse = 1;
@@ -409,11 +409,11 @@ cond_t CondCreate(lock_t lock) {
   }
   RestoreIntrs(intrval);
   if(i == MAX_CONDS) return SYNC_FAIL;
-  printf("&locks[lock] for conditional =>%p", &locks[lock]);
+  // printf("&locks[lock] for conditional =>%p", &locks[lock]);
   cond_vars[i].lock = (Lock*)&locks[lock];
   if(!CondInit((Cond*)&cond_vars[i])) return SYNC_FAIL;
   
-  printf("Succesfully Created Conditional Variable\n");
+  // printf("Succesfully Created Conditional Variable\n");
   // printf("Size of cond waiting queue %d\n", cond_vars[i].waiting.nitems);
   
   // printf("Conditional Variable address is %p\n", &cond_vars[i]);
@@ -473,26 +473,28 @@ int CondWait(Cond* cond_var){
   Link* l;
   int intrval;
   // Release Lock
-  if (LockRelease(cond_var->lock) == SYNC_SUCCESS) printf("OS PROCESS : %d Lock Released\n",GetCurrentPid());
+  LockRelease(cond_var->lock);
+  // if (LockRelease(cond_var->lock) == SYNC_SUCCESS) printf("OS PROCESS : %d Lock Released\n",GetCurrentPid());
   intrval = DisableIntrs ();
-    printf("OS PROCESS : %d Inside CondWait\n",GetCurrentPid());
+    // printf("OS PROCESS : %d Inside CondWait\n",GetCurrentPid());
 
   dbprintf('s', "Cond_Wait: putting process %d to sleep\n", GetCurrentPid());
     if ((l = AQueueAllocLink ((void *)currentPCB)) == NULL) {
       printf("FATAL ERROR: could not allocate link for Cond Var queue in Cond_Wait!\n");
       exitsim();
     }
-    printf("Putting %d into waiting CondVar waiting Queue\n",GetPidFromAddress((PCB*)l->object));
+    // printf("Putting %d into waiting CondVar waiting Queue\n",GetPidFromAddress((PCB*)l->object));
     if (AQueueInsertLast (&cond_var->waiting, l) != QUEUE_SUCCESS) {
       printf("FATAL ERROR: could not insert new link into Cond Var waiting queue in Cond_Wait!\n");
       exitsim();
     }
-    printf("PID --- %d is put to sleep in Cond_Wait\n",GetCurrentPid());
+    // printf("PID --- %d is put to sleep in Cond_Wait\n",GetCurrentPid());
     ProcessSleep();
     RestoreIntrs (intrval);
 
-    // Acquire Lock
-    if (LockAcquire(cond_var->lock)) printf("Lock Released\n");
+    // Acquire Lock'
+    LockAcquire(cond_var->lock);
+    // if (LockAcquire(cond_var->lock)) printf("Lock Released\n");
 
 
   return SYNC_SUCCESS;
@@ -534,11 +536,11 @@ int CondSignal(Cond* cond_var){
 
 
   intrval = DisableIntrs ();
-  printf("OS PROCESS : %d Inside CondSignal\n",GetCurrentPid());
+  // printf("OS PROCESS : %d Inside CondSignal\n",GetCurrentPid());
   if (!AQueueEmpty(&cond_var->waiting)) {
     // printf("AQueueEmpty(&cond_var->waiting) =>%d \n",AQueueEmpty(&cond_var->waiting));
     l = AQueueFirst(&cond_var->waiting);
-    printf("l = %p\n",l);
+    // printf("l = %p\n",l);
       pcb = (PCB *)AQueueObject(l);
       if (AQueueRemove(&l) != QUEUE_SUCCESS) { 
         printf("FATAL ERROR: could not remove link from cond_var queue in CondSignal!\n");
@@ -549,39 +551,39 @@ int CondSignal(Cond* cond_var){
       exitsim();
       }
 
-      printf("OS PROCESS : %d Woke Up ---- %d\n",GetCurrentPid(), (int)(GetPidFromAddress(pcb)));
+      // printf("OS PROCESS : %d Woke Up ---- %d\n",GetCurrentPid(), (int)(GetPidFromAddress(pcb)));
       
       // ProcessWakeup (pcb);
-    printf("putting %d in lock %p \n", (int)(GetPidFromAddress(pcb), &(cond_var->lock->waiting)));
+    // printf("putting %d in lock %p \n", (int)(GetPidFromAddress(pcb), &(cond_var->lock->waiting)));
     if (AQueueInsertLast (&(cond_var->lock->waiting), l) != QUEUE_SUCCESS) {
       printf("FATAL ERROR: could not insert new link into lock waiting queue in CondSignal!\n");
       exitsim();
     }
-    printf("OS PROCESS : %d Put in lock waiting queue\n",(int)(GetPidFromAddress(pcb)));
+    // printf("OS PROCESS : %d Put in lock waiting queue\n",(int)(GetPidFromAddress(pcb)));
 
       if ((l = AQueueAllocLink ((void *)currentPCB)) == NULL) {
       printf("FATAL ERROR: could not allocate link for lock queue in CondSignal!\n");
       exitsim();
       }
 
-    printf("putting %d in lock %p \n",GetCurrentPid(), &(cond_var->lock->waiting));
+    // printf("putting %d in lock %p \n",GetCurrentPid(), &(cond_var->lock->waiting));
     if (AQueueInsertLast (&(cond_var->lock->waiting), l) != QUEUE_SUCCESS) {
       printf("FATAL ERROR: could not insert new link into lock waiting queue in CondSignal!\n");
       exitsim();
     }
     
-      if(LockTransfer(cond_var->lock,pcb) == SYNC_SUCCESS) printf("OS PROCESS : %d Successfully Transferred Lock to %d\n",GetCurrentPid(),(int)(GetPidFromAddress(pcb)));
-      else printf("OS PROCESS : %d Failed Transferred Lock to %d\n",GetCurrentPid(),(int)(GetPidFromAddress(pcb)));
-      
+      // if(LockTransfer(cond_var->lock,pcb) == SYNC_SUCCESS) printf("OS PROCESS : %d Successfully Transferred Lock to %d\n",GetCurrentPid(),(int)(GetPidFromAddress(pcb)));
+      // else printf("OS PROCESS : %d Failed Transferred Lock to %d\n",GetCurrentPid(),(int)(GetPidFromAddress(pcb)));
+      LockTransfer(cond_var->lock,pcb);
       
       
       ProcessSleep();
       LockAcquire(cond_var->lock);
-      printf("OS PROCESS : %d Acquire Lock\n",GetCurrentPid());
+      // printf("OS PROCESS : %d Acquire Lock\n",GetCurrentPid());
       // ProcessSchedule
 
   }
-  else printf("OS PROCESS : %d No waiting process in cond_vars queue\n",GetCurrentPid());
+  // else printf("OS PROCESS : %d No waiting process in cond_vars queue\n",GetCurrentPid());
   RestoreIntrs (intrval);
   return SYNC_SUCCESS;
 

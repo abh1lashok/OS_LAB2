@@ -25,11 +25,12 @@ void main (int argc, char *argv[])
   while(i< N_H2O){
   Printf("An H2O molecule is created \n");
 
-  if(sem_signal(H2O)) Printf("sem_H2O signal passed \n\n");
+  // if(sem_signal(H2O)) Printf("sem_H2O signal passed \n\n");
+  sem_signal(H2O);
     i++;   
   }
   // Signal the semaphore to tell the original process that we're done
-  Printf("PROD - PID %d is complete.\n", Getpid());
+  // Printf("PROD - PID %d is complete.\n", Getpid());
   if(sem_signal(s_procs_completed) != SYNC_SUCCESS) {
     Printf("Bad semaphore s_procs_completed (%d) in ", s_procs_completed); Printf(argv[0]); Printf(", exiting...\n");
     Exit();

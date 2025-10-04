@@ -417,18 +417,12 @@ LC8:
 	.ascii "dle to lock>\n\000"
 	.align 2
 LC9:
-	.ascii "N3 - sem wait is passed\n\000"
+	.ascii "An N molecules is created\n\000"
 	.align 2
 LC10:
-	.ascii "3 N molecules are created\n\000"
-	.align 2
-LC11:
-	.ascii "Sem_N signal passed\n\000"
-	.align 2
-LC12:
 	.ascii "Bad semaphore s_procs_completed (%d) in \000"
 	.align 2
-LC13:
+LC11:
 	.ascii ", exiting...\n\000"
 .text
 	.align 2
@@ -441,7 +435,7 @@ _main:
 	sw	-8(r29),r31	; push ret addr
 	subui	r29,r29,#8	; alloc local storage
 	lw	r2,(r30)
-	lw	r6,4(r30)
+	lw	r7,4(r30)
 	jal	___main
 	nop	; not filled.
 	snei	r1,r2,#5
@@ -453,7 +447,7 @@ _main:
 	sw	(r29),r9
 	jal	_Printf
 	nop	; not filled.
-	lw	r9,(r6)
+	lw	r9,(r7)
 	sw	(r29),r9
 	jal	_Printf
 	nop	; not filled.
@@ -467,7 +461,7 @@ _main:
 	addi	r29,r29,#8
 L48:
 	addi	r29,r29,#-16
-	lw	r9,4(r6)
+	lw	r9,4(r7)
 	sw	(r29),r9
 	addi	r9,r0,#0
 	sw	4(r29),r9
@@ -476,7 +470,7 @@ L48:
 	jal	_dstrtol
 	nop	; not filled.
 	add	r5,r0,r1
-	lw	r9,16(r6)
+	lw	r9,16(r7)
 	sw	(r29),r9
 	addi	r9,r0,#0
 	sw	4(r29),r9
@@ -485,7 +479,7 @@ L48:
 	jal	_dstrtol
 	nop	; not filled.
 	add	r8,r0,r1
-	lw	r9,8(r6)
+	lw	r9,8(r7)
 	sw	(r29),r9
 	addi	r9,r0,#0
 	sw	4(r29),r9
@@ -493,8 +487,8 @@ L48:
 	sw	8(r29),r9
 	jal	_dstrtol
 	nop	; not filled.
-	add	r7,r0,r1
-	lw	r9,12(r6)
+	add	r6,r0,r1
+	lw	r9,12(r7)
 	sw	(r29),r9
 	addi	r9,r0,#0
 	sw	4(r29),r9
@@ -510,49 +504,25 @@ L48:
 	nop	; not filled.
 L51:
 	addi	r29,r29,#-8
-	sw	(r29),r7
+	sw	(r29),r6
 	jal	_sem_wait
 	nop	; not filled.
+	addi	r2,r0,#0
 	addi	r29,r29,#8
-	snei	r1,r1,#0
-	beqz	r1,L52
-	nop	; not filled.
+L55:
 	addi	r29,r29,#-8
 	lhi	r9,((LC9)>>16)&0xffff
 	addui	r9,r9,(LC9)&0xffff
 	sw	(r29),r9
 	jal	_Printf
 	nop	; not filled.
-	addi	r29,r29,#8
-L52:
-	addi	r29,r29,#-8
-	lhi	r9,((LC10)>>16)&0xffff
-	addui	r9,r9,(LC10)&0xffff
-	sw	(r29),r9
-	jal	_Printf
-	nop	; not filled.
-	addi	r2,r0,#0
-	addi	r29,r29,#8
-L56:
-	addi	r29,r29,#-8
 	sw	(r29),r4
 	jal	_sem_signal
 	nop	; not filled.
 	addi	r29,r29,#8
-	snei	r1,r1,#0
-	beqz	r1,L55
-	nop	; not filled.
-	addi	r29,r29,#-8
-	lhi	r9,((LC11)>>16)&0xffff
-	addui	r9,r9,(LC11)&0xffff
-	sw	(r29),r9
-	jal	_Printf
-	nop	; not filled.
-	addi	r29,r29,#8
-L55:
 	addi	r2,r2,#1
 	slei	r1,r2,#2
-	bnez	r1,L56
+	bnez	r1,L55
 	nop	; not filled.
 	addi	r3,r3,#1
 	sltu	r1,r3,r5
@@ -565,28 +535,28 @@ L50:
 	nop	; not filled.
 	addi	r29,r29,#8
 	snei	r1,r1,#1
-	beqz	r1,L60
+	beqz	r1,L58
 	nop	; not filled.
 	addi	r29,r29,#-8
-	lhi	r9,((LC12)>>16)&0xffff
-	addui	r9,r9,(LC12)&0xffff
+	lhi	r9,((LC10)>>16)&0xffff
+	addui	r9,r9,(LC10)&0xffff
 	sw	(r29),r9
 	sw	4(r29),r8
 	jal	_Printf
 	nop	; not filled.
-	lw	r6,(r6)
-	sw	(r29),r6
+	lw	r7,(r7)
+	sw	(r29),r7
 	jal	_Printf
 	nop	; not filled.
-	lhi	r9,((LC13)>>16)&0xffff
-	addui	r9,r9,(LC13)&0xffff
+	lhi	r9,((LC11)>>16)&0xffff
+	addui	r9,r9,(LC11)&0xffff
 	sw	(r29),r9
 	jal	_Printf
 	nop	; not filled.
 	jal	_Exit
 	nop	; not filled.
 	addi	r29,r29,#8
-L60:
+L58:
 	jal	_exit
 	nop
 .endproc _main

@@ -71,50 +71,53 @@ void main (int argc, char *argv[])
 
   // Printf('not_full.waiting.nitems= %d' ,not_full.waiting.nitems);
   // Printf("PROD - PID %d: Putting Data in\n");
-  while((DATA[j-1] != '\0') || j == 0){
+  while(j < STRING_SIZE){
     
     
     //get lock
-    
-      if(lock_acquire(lock))Printf("\nPROD - PID %d ---- ACQUIRED LOCK \n",Getpid());
+    lock_acquire(lock);
+      // if(lock_acquire(lock))Printf("\nPROD - PID %d ---- ACQUIRED LOCK \n",Getpid());
     
     // lock_acquire(prod_cons_lock);
     if(is_full(cb)){
-      Printf("PROD - PID %d ---- Found to be Full\n", Getpid());
-      if(cond_wait(not_full)) Printf("PROD - PID %d ---- Succesful Wait for j =  %d \n",Getpid(),j);
+      // Printf("PROD - PID %d ---- Found to be Full\n", Getpid());
+      cond_wait(not_full);
+      // if(cond_wait(not_full)) Printf("PROD - PID %d ---- Succesful Wait for j =  %d \n",Getpid(),j);
     }
       
-      Printf("PROD - PID %d ---- Put %c in cb \n",Getpid(),DATA[j]);
+      
       put_item_cb(DATA[j],cb);
+      Printf("Producer %d inserted: %c\n",Getpid(),DATA[j]);
       j++;
       
     
-      Printf("\n");
+      // Printf("\n");
     // lock_release(prod_cons_lock);
     
     // sem_signal(full_sem);
     // Printf("PROD - PID %d ----",Getpid());
     // Print_cb(cb);
     // sem_signal(full_sem);
-    
-    if(cond_signal(not_empty))Printf("PROD - PID %d ---- Successful Signal For j =  %d \n",Getpid(),j-1);
-    if(lock_release(lock))Printf("\nPROD - PID %d ---- RELEASED LOCK \n",Getpid());
+    cond_signal(not_empty);
+    lock_release(lock);
+    // if(cond_signal(not_empty))Printf("PROD - PID %d ---- Successful Signal For j =  %d \n",Getpid(),j-1);
+    // if(lock_release(lock))Printf("\nPROD - PID %d ---- RELEASED LOCK \n",Getpid());
     // lock_release(lock);
     
 
 
   }
 
-  lock_acquire(lock);
-  Printf("PROD - PID ---- %d Sent Everything \n",Getpid());
-  lock_release(lock);
+  // lock_acquire(lock);
+  // // Printf("PROD - PID ---- %d Sent Everything \n",Getpid());
+  // lock_release(lock);
 
 
   // Printf("cb - %d ---- %p \n",Getpid(),cb);
 
 
   // Signal the semaphore to tell the original process that we're done
-  Printf("PROD - PID %d is complete.\n", Getpid());
+  // Printf("PROD - PID %d is complete.\n", Getpid());
   if(sem_signal(s_procs_completed) != SYNC_SUCCESS) {
     Printf("Bad semaphore s_procs_completed (%d) in ", s_procs_completed); Printf(argv[0]); Printf(", exiting...\n");
     Exit();

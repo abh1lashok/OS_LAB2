@@ -265,7 +265,7 @@ void ProcessSuspend (PCB *suspend) {
     printf("FATAL ERROR: could not get Queue Link in ProcessSuspend!\n");
     exitsim();
   }
-  printf("PROCESS : OS In Process Suspend Putting %d to wait queue\n",GetCurrentPid());
+  // printf("PROCESS : OS In Process Suspend Putting %d to wait queue\n",GetCurrentPid());
   if (AQueueInsertLast(&waitQueue, suspend->l) != QUEUE_SUCCESS) {
     printf("FATAL ERROR: could not insert suspend PCB into waitQueue!\n");
     exitsim();

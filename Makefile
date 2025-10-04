@@ -1,5 +1,5 @@
 # Default trial directory (can be overridden from command line)
-TRIAL ?= q4_trial
+TRIAL ?= q3_trial
 
 default:
 	@echo

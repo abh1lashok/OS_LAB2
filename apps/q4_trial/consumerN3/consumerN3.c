@@ -28,10 +28,14 @@ int j;
   i = 0;
   
   while(i < N_N3){
-    if (sem_wait(N3)) Printf("N3 - sem wait is passed\n");
-    Printf("3 N molecules are created\n");
+    sem_wait(N3);
+    // if (sem_wait(N3)) Printf("N3 - sem wait is passed\n");
+
     
-    for(j = 0; j < 3; j++){if(sem_signal(N)) Printf("Sem_N signal passed\n");}
+    for(j = 0; j < 3; j++){
+      Printf("An N molecules is created\n");
+      sem_signal(N);
+    }
     i++;
   }
  

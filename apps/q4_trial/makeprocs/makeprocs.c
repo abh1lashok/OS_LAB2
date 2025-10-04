@@ -172,18 +172,7 @@ void main (int argc, char *argv[])
   ditoa(NO2, NO2_str);
   ditoa(O2, O2_str);
  
-//  Printf("Lauda O2 value\n");
-  Printf("N3 - %d\n", N3);
-  Printf("O2 - %d\n", O2);
-  Printf("N - %d\n", N);
-  Printf("NO2 - %d\n", NO2);
-  Printf("H2O - %d\n", H2O);
 
-  Printf(N3_str);
-  Printf(O2_str);
-  Printf(N_str);
-  Printf(NO2_str);
-  Printf(H2O_str);
   // Now we can create the processes.  Note that you MUST end your call to
   // process_create with a NULL argument so that the operating system
   // knows how many arguments you are sending.
@@ -192,21 +181,21 @@ void main (int argc, char *argv[])
 
     // N3 consumer
     process_create(N3_CONSUMER_TO_RUN, n_N3_str,N3_str, N_str, s_procs_completed_str, NULL);
-    Printf("CONSUMER Process %d created\n", 1);
+    // Printf("CONSUMER Process %d created\n", 1);
     // H20 consumer
     process_create(H2O_CONSUMER_TO_RUN, n_H2O_str, H2O_str, O2_str,s_procs_completed_str, NULL);
-    Printf("CONSUMER Process %d created\n", 2);
+    // Printf("CONSUMER Process %d created\n", 2);
 
 
-        process_create(N3_PRODUCER_TO_RUN, n_N3_str,N3_str, s_procs_completed_str, NULL);
-    Printf("PRODUCER N3 Process %d created\n", 1);
+    process_create(N3_PRODUCER_TO_RUN, n_N3_str,N3_str, s_procs_completed_str, NULL);
+    // Printf("PRODUCER N3 Process %d created\n", 1);
 
     process_create(H2O_PRODUCER_TO_RUN, n_H2O_str,H2O_str,s_procs_completed_str, NULL);
-    Printf("PRODUCER H2O Process %d created\n", 2);
+    // Printf("PRODUCER H2O Process %d created\n", 2);
 
     // N and O2 consumer
     process_create(N_O2_CONSUMER_TO_RUN, n_N3_str, n_H2O_str, N_str, O2_str, NO2_str, s_procs_completed_str, NULL);
-    Printf("CONSUMER Process %d created\n", 3);
+    // Printf("CONSUMER Process %d created\n", 3);
 
 
   // And finally, wait until all spawned processes have finished.

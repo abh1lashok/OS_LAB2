@@ -1,7 +1,7 @@
 ; Linked by DLX-LD.
 ; MemSize 24576
-; Data size: 370
-; Text size: 5504
+; Data size: 322
+; Text size: 5424
 ; Stack size: 8192
 .text 0x1000
 .data 0x3000
@@ -424,18 +424,12 @@ LC8_LF0:
 .ascii "dle to lock>\n\000"
 .align 2
 LC9_LF0:
-.ascii "Sem_wait H2O signal passed\n\000"
+.ascii "An O2 molecule is created\n\000"
 .align 2
 LC10_LF0:
-.ascii "O2 molecule is created\n\000"
-.align 2
-LC11_LF0:
-.ascii "Sem_O2 signal passed\n\n\000"
-.align 2
-LC12_LF0:
 .ascii "Bad semaphore s_procs_completed (%d) in \000"
 .align 2
-LC13_LF0:
+LC11_LF0:
 .ascii ", exiting...\n\000"
 .text
 .align 2
@@ -525,8 +519,9 @@ L55_LF0:
 	jal	_sem_wait
 	nop; not filled.
 	addi	r29,r29,#8
-	snei	r1,r1,#0
-	beqz	r1,L54_LF0
+	addi	r2,r2,#1
+	slei	r1,r2,#1
+	bnez	r1,L55_LF0
 	nop; not filled.
 	addi	r29,r29,#-8
 	lhi	r9,((LC9_LF0)>>16)&0xffff
@@ -534,34 +529,11 @@ L55_LF0:
 	sw	(r29),r9
 	jal	_Printf
 	nop; not filled.
-	addi	r29,r29,#8
-L54_LF0:
-	addi	r2,r2,#1
-	slei	r1,r2,#1
-	bnez	r1,L55_LF0
-	nop; not filled.
-	addi	r29,r29,#-8
-	lhi	r9,((LC10_LF0)>>16)&0xffff
-	addui	r9,r9,(LC10_LF0)&0xffff
-	sw	(r29),r9
-	jal	_Printf
-	nop; not filled.
 	sw	(r29),r6
 	jal	_sem_signal
 	nop; not filled.
-	addi	r29,r29,#8
-	seqi	r1,r1,#1
-	beqz	r1,L58_LF0
-	nop; not filled.
-	addi	r29,r29,#-8
-	lhi	r9,((LC11_LF0)>>16)&0xffff
-	addui	r9,r9,(LC11_LF0)&0xffff
-	sw	(r29),r9
-	jal	_Printf
-	nop; not filled.
-	addi	r29,r29,#8
-L58_LF0:
 	addi	r3,r3,#1
+	addi	r29,r29,#8
 	sltu	r1,r3,r5
 	bnez	r1,L51_LF0
 	nop; not filled.
@@ -572,11 +544,11 @@ L50_LF0:
 	nop; not filled.
 	addi	r29,r29,#8
 	snei	r1,r1,#1
-	beqz	r1,L60_LF0
+	beqz	r1,L58_LF0
 	nop; not filled.
 	addi	r29,r29,#-8
-	lhi	r9,((LC12_LF0)>>16)&0xffff
-	addui	r9,r9,(LC12_LF0)&0xffff
+	lhi	r9,((LC10_LF0)>>16)&0xffff
+	addui	r9,r9,(LC10_LF0)&0xffff
 	sw	(r29),r9
 	sw	4(r29),r8
 	jal	_Printf
@@ -585,15 +557,15 @@ L50_LF0:
 	sw	(r29),r7
 	jal	_Printf
 	nop; not filled.
-	lhi	r9,((LC13_LF0)>>16)&0xffff
-	addui	r9,r9,(LC13_LF0)&0xffff
+	lhi	r9,((LC11_LF0)>>16)&0xffff
+	addui	r9,r9,(LC11_LF0)&0xffff
 	sw	(r29),r9
 	jal	_Printf
 	nop; not filled.
 	jal	_Exit
 	nop; not filled.
 	addi	r29,r29,#8
-L60_LF0:
+L58_LF0:
 	jal	_exit
 	nop
 .endproc _main

@@ -417,21 +417,12 @@ LC8:
 	.ascii "dle to lock>\n\000"
 	.align 2
 LC9:
-	.ascii "Sem_wait of O2 passed \n\000"
-	.align 2
-LC10:
-	.ascii "Sem_wait of N is passed \n\000"
-	.align 2
-LC11:
 	.ascii "An NO2 molecule is created \n\000"
 	.align 2
-LC12:
-	.ascii "Sem_signal of NO2 is passed \n\n\000"
-	.align 2
-LC13:
+LC10:
 	.ascii "Bad semaphore s_procs_completed (%d) in \000"
 	.align 2
-LC14:
+LC11:
 	.ascii ", exiting...\n\000"
 .text
 	.align 2
@@ -543,56 +534,19 @@ L49:
 	sw	(r29),r7
 	jal	_sem_wait
 	nop	; not filled.
-	addi	r29,r29,#8
-	snei	r1,r1,#0
-	beqz	r1,L52
-	nop	; not filled.
-	addi	r29,r29,#-8
-	lhi	r10,((LC9)>>16)&0xffff
-	addui	r10,r10,(LC9)&0xffff
-	sw	(r29),r10
-	jal	_Printf
-	nop	; not filled.
-	addi	r29,r29,#8
-L52:
-	addi	r29,r29,#-8
 	sw	(r29),r8
 	jal	_sem_wait
 	nop	; not filled.
-	addi	r29,r29,#8
-	snei	r1,r1,#0
-	beqz	r1,L53
-	nop	; not filled.
-	addi	r29,r29,#-8
-	lhi	r10,((LC10)>>16)&0xffff
-	addui	r10,r10,(LC10)&0xffff
-	sw	(r29),r10
-	jal	_Printf
-	nop	; not filled.
-	addi	r29,r29,#8
-L53:
-	addi	r29,r29,#-8
-	lhi	r10,((LC11)>>16)&0xffff
-	addui	r10,r10,(LC11)&0xffff
+	lhi	r10,((LC9)>>16)&0xffff
+	addui	r10,r10,(LC9)&0xffff
 	sw	(r29),r10
 	jal	_Printf
 	nop	; not filled.
 	sw	(r29),r6
 	jal	_sem_signal
 	nop	; not filled.
-	addi	r29,r29,#8
-	snei	r1,r1,#0
-	beqz	r1,L54
-	nop	; not filled.
-	addi	r29,r29,#-8
-	lhi	r10,((LC12)>>16)&0xffff
-	addui	r10,r10,(LC12)&0xffff
-	sw	(r29),r10
-	jal	_Printf
-	nop	; not filled.
-	addi	r29,r29,#8
-L54:
 	addi	r2,r2,#1
+	addi	r29,r29,#8
 	j	L49
 	nop	; not filled.
 L50:
@@ -602,11 +556,11 @@ L50:
 	nop	; not filled.
 	addi	r29,r29,#8
 	snei	r1,r1,#1
-	beqz	r1,L55
+	beqz	r1,L52
 	nop	; not filled.
 	addi	r29,r29,#-8
-	lhi	r10,((LC13)>>16)&0xffff
-	addui	r10,r10,(LC13)&0xffff
+	lhi	r10,((LC10)>>16)&0xffff
+	addui	r10,r10,(LC10)&0xffff
 	sw	(r29),r10
 	sw	4(r29),r9
 	jal	_Printf
@@ -615,15 +569,15 @@ L50:
 	sw	(r29),r4
 	jal	_Printf
 	nop	; not filled.
-	lhi	r10,((LC14)>>16)&0xffff
-	addui	r10,r10,(LC14)&0xffff
+	lhi	r10,((LC11)>>16)&0xffff
+	addui	r10,r10,(LC11)&0xffff
 	sw	(r29),r10
 	jal	_Printf
 	nop	; not filled.
 	jal	_Exit
 	nop	; not filled.
 	addi	r29,r29,#8
-L55:
+L52:
 	jal	_exit
 	nop
 .endproc _main

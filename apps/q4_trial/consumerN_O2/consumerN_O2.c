@@ -41,11 +41,11 @@ int k;
   j = N_H2O/2;
   k = 0;
   while(k < min(i, j)){
-        if(sem_wait(O2)) Printf("Sem_wait of O2 passed \n");
-        if(sem_wait(N)) Printf("Sem_wait of N is passed \n");
+        sem_wait(O2);
+        sem_wait(N);
         Printf("An NO2 molecule is created \n");
-        if(sem_signal(NO2)) Printf("Sem_signal of NO2 is passed \n\n");
-        k ++;
+        sem_signal(NO2);
+        k++;
 
   }
  

@@ -1,10 +1,10 @@
 ; Linked by DLX-LD.
-; MemSize 126976
-; Data size: 40468
-; Text size: 71564
+; MemSize 122880
+; Data size: 39364
+; Text size: 69608
 ; Stack size: 8192
 .text 0x1000
-.data 0x13000
+.data 0x12000
 ; Compiled by GCC
 .text
 .align 2
@@ -5718,9 +5718,6 @@ LC21_LF3:
 .ascii "FATAL ERROR: could not get Queue Link in ProcessSuspend!\n\000"
 .align 2
 LC22_LF3:
-.ascii "PROCESS : OS In Process Suspend Putting %d to wait queue\n\000"
-.align 2
-LC23_LF3:
 .ascii "FATAL ERROR: could not insert suspend PCB into waitQueue!\n\000"
 .text
 .align 2
@@ -5868,18 +5865,6 @@ L62_LF3:
 	jal	_exitsim
 	nop; delay slot nop
 L63_LF3:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC22_LF3)>>16)&0xffff
-	addui	r3,r3,(LC22_LF3)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lhi	r2,((_waitQueue_LF3)>>16)&0xffff
@@ -5896,8 +5881,8 @@ L63_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC23_LF3)>>16)&0xffff
-	addui	r2,r2,(LC23_LF3)&0xffff
+	lhi	r2,((LC22_LF3)>>16)&0xffff
+	addui	r2,r2,(LC22_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -5917,23 +5902,23 @@ L57_LF3:
 .endproc _ProcessSuspend
 .data
 .align 2
-LC24_LF3:
+LC23_LF3:
 .ascii "Waking up PID %d.\n\000"
 .align 2
-LC25_LF3:
+LC24_LF3:
 .ascii "ProcessWakeup\000"
 .align 2
-LC26_LF3:
+LC25_LF3:
 .ascii "Trying to wake up a non-sleeping process!\n\000"
 .align 2
-LC27_LF3:
+LC26_LF3:
 .ascii "FATAL ERROR: could not remove wakeup PCB from waitQueue in ProcessWake"
 .ascii "up!\n\000"
 .align 2
-LC28_LF3:
+LC27_LF3:
 .ascii "FATAL ERROR: could not get link for wakeup PCB in ProcessWakeup!\n\000"
 .align 2
-LC29_LF3:
+LC28_LF3:
 .ascii "FATAL ERROR: could not insert link into runQueue in ProcessWakeup!\n\000"
 .text
 .align 2
@@ -5963,8 +5948,8 @@ _ProcessWakeup:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC24_LF3)>>16)&0xffff
-	addui	r2,r2,(LC24_LF3)&0xffff
+	lhi	r2,((LC23_LF3)>>16)&0xffff
+	addui	r2,r2,(LC23_LF3)&0xffff
 	sw	(r1),r2
 	lw	r3,(r30)
 	lhi	r4,((_pcbs_LF3)>>16)&0xffff
@@ -5997,8 +5982,8 @@ L66_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC24_LF3)>>16)&0xffff
-	addui	r2,r2,(LC24_LF3)&0xffff
+	lhi	r2,((LC23_LF3)>>16)&0xffff
+	addui	r2,r2,(LC23_LF3)&0xffff
 	sw	(r1),r2
 	lw	r3,(r30)
 	lhi	r4,((_pcbs_LF3)>>16)&0xffff
@@ -6030,11 +6015,11 @@ L68_LF3:
 	lhi	r2,((LC17_LF3)>>16)&0xffff
 	addui	r2,r2,(LC17_LF3)&0xffff
 	sw	(r1),r2
+	lhi	r2,((LC24_LF3)>>16)&0xffff
+	addui	r2,r2,(LC24_LF3)&0xffff
+	sw	4(r1),r2
 	lhi	r2,((LC25_LF3)>>16)&0xffff
 	addui	r2,r2,(LC25_LF3)&0xffff
-	sw	4(r1),r2
-	lhi	r2,((LC26_LF3)>>16)&0xffff
-	addui	r2,r2,(LC26_LF3)&0xffff
 	sw	8(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6062,8 +6047,8 @@ L69_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC27_LF3)>>16)&0xffff
-	addui	r2,r2,(LC27_LF3)&0xffff
+	lhi	r2,((LC26_LF3)>>16)&0xffff
+	addui	r2,r2,(LC26_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6086,8 +6071,8 @@ L70_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC28_LF3)>>16)&0xffff
-	addui	r2,r2,(LC28_LF3)&0xffff
+	lhi	r2,((LC27_LF3)>>16)&0xffff
+	addui	r2,r2,(LC27_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6112,8 +6097,8 @@ L71_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC29_LF3)>>16)&0xffff
-	addui	r2,r2,(LC29_LF3)&0xffff
+	lhi	r2,((LC28_LF3)>>16)&0xffff
+	addui	r2,r2,(LC28_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6134,16 +6119,16 @@ L65_LF3:
 .endproc _ProcessWakeup
 .data
 .align 2
-LC30_LF3:
+LC29_LF3:
 .ascii "Entering ProcessDestroy for 0x%x.\n\000"
 .align 2
-LC31_LF3:
+LC30_LF3:
 .ascii "FATAL ERROR: could not remove link from queue in ProcessDestroy!\n\000"
 .align 2
-LC32_LF3:
+LC31_LF3:
 .ascii "FATAL ERROR: could not get link for zombie PCB in ProcessDestroy!\n\000"
 .align 2
-LC33_LF3:
+LC32_LF3:
 .ascii "Leaving ProcessDestroy for 0x%x.\n\000"
 .text
 .align 2
@@ -6172,8 +6157,8 @@ _ProcessDestroy:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC30_LF3)>>16)&0xffff
-	addui	r2,r2,(LC30_LF3)&0xffff
+	lhi	r2,((LC29_LF3)>>16)&0xffff
+	addui	r2,r2,(LC29_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -6196,8 +6181,8 @@ L74_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC30_LF3)>>16)&0xffff
-	addui	r2,r2,(LC30_LF3)&0xffff
+	lhi	r2,((LC29_LF3)>>16)&0xffff
+	addui	r2,r2,(LC29_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -6227,8 +6212,8 @@ L75_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC31_LF3)>>16)&0xffff
-	addui	r2,r2,(LC31_LF3)&0xffff
+	lhi	r2,((LC30_LF3)>>16)&0xffff
+	addui	r2,r2,(LC30_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6251,8 +6236,8 @@ L76_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC32_LF3)>>16)&0xffff
-	addui	r2,r2,(LC32_LF3)&0xffff
+	lhi	r2,((LC31_LF3)>>16)&0xffff
+	addui	r2,r2,(LC31_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6277,8 +6262,8 @@ L77_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC29_LF3)>>16)&0xffff
-	addui	r2,r2,(LC29_LF3)&0xffff
+	lhi	r2,((LC28_LF3)>>16)&0xffff
+	addui	r2,r2,(LC28_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6302,8 +6287,8 @@ L78_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC33_LF3)>>16)&0xffff
-	addui	r2,r2,(LC33_LF3)&0xffff
+	lhi	r2,((LC32_LF3)>>16)&0xffff
+	addui	r2,r2,(LC32_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -6326,8 +6311,8 @@ L79_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC33_LF3)>>16)&0xffff
-	addui	r2,r2,(LC33_LF3)&0xffff
+	lhi	r2,((LC32_LF3)>>16)&0xffff
+	addui	r2,r2,(LC32_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -6366,62 +6351,62 @@ L81_LF3:
 .endproc _ProcessExit_LF3
 .data
 .align 2
-LC34_LF3:
+LC33_LF3:
 .ascii "Old interrupt value was 0x%x.\n\000"
 .align 2
-LC35_LF3:
+LC34_LF3:
 .ascii "Entering ProcessFork args=0x%x 0x%x %s %d\n\000"
 .align 2
-LC36_LF3:
+LC35_LF3:
 .ascii "FATAL error: no free processes!\n\000"
 .align 2
-LC37_LF3:
+LC36_LF3:
 .ascii "Got a link @ 0x%x\n\000"
 .align 2
-LC38_LF3:
+LC37_LF3:
 .ascii "FATAL ERROR: could not remove link from freepcbsQueue in ProcessFork!\n"
 .ascii "\000"
 .align 2
-LC39_LF3:
+LC38_LF3:
 .ascii "Before restore interrupt value is 0x%x.\n\000"
 .align 2
-LC40_LF3:
+LC39_LF3:
 .ascii "New interrupt value is 0x%x.\n\000"
 .align 2
-LC41_LF3:
+LC40_LF3:
 .ascii "aFATAL: couldn\'t allocate memory - no free pages!\n\000"
 .align 2
-LC42_LF3:
+LC41_LF3:
 .ascii "bFATAL: couldn\'t allocate system stack - no free pages!\n\000"
 .align 2
-LC43_LF3:
+LC42_LF3:
 .ascii "Setting up PCB @ 0x%x (sys stack=0x%x, mem=0x%x, size=0x%x)\n\000"
 .align 2
-LC44_LF3:
+LC43_LF3:
 .ascii "About to load %s\n\000"
 .align 2
-LC45_LF3:
+LC44_LF3:
 .ascii "File %s -> start=0x%08x\n\000"
 .align 2
-LC46_LF3:
+LC45_LF3:
 .ascii "File %s -> code @ 0x%08x (size=0x%08x)\n\000"
 .align 2
-LC47_LF3:
+LC46_LF3:
 .ascii "File %s -> data @ 0x%08x (size=0x%08x)\n\000"
 .align 2
-LC48_LF3:
+LC47_LF3:
 .ascii "Placing %d bytes at vaddr %08x.\n\000"
 .align 2
-LC49_LF3:
+LC48_LF3:
 .ascii "FATAL ERROR: could not get link for forked PCB in ProcessFork!\n\000"
 .align 2
-LC50_LF3:
+LC49_LF3:
 .ascii "FATAL ERROR: could not insert link into runQueue in ProcessFork!\n\000"
 .align 2
-LC51_LF3:
+LC50_LF3:
 .ascii "Setting currentPCB=0x%x, stackframe=0x%x\n\000"
 .align 2
-LC52_LF3:
+LC51_LF3:
 .ascii "Leaving ProcessFork (%s)\n\000"
 .text
 .align 2
@@ -6458,8 +6443,8 @@ _ProcessFork:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC34_LF3)>>16)&0xffff
-	addui	r2,r2,(LC34_LF3)&0xffff
+	lhi	r2,((LC33_LF3)>>16)&0xffff
+	addui	r2,r2,(LC33_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-56(r30)
 	sw	4(r1),r2
@@ -6482,8 +6467,8 @@ L83_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC34_LF3)>>16)&0xffff
-	addui	r2,r2,(LC34_LF3)&0xffff
+	lhi	r2,((LC33_LF3)>>16)&0xffff
+	addui	r2,r2,(LC33_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-56(r30)
 	sw	4(r1),r2
@@ -6506,8 +6491,8 @@ L84_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-24
 	add	r1,r0,r29
-	lhi	r2,((LC35_LF3)>>16)&0xffff
-	addui	r2,r2,(LC35_LF3)&0xffff
+	lhi	r2,((LC34_LF3)>>16)&0xffff
+	addui	r2,r2,(LC34_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -6536,8 +6521,8 @@ L85_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-24
 	add	r1,r0,r29
-	lhi	r2,((LC35_LF3)>>16)&0xffff
-	addui	r2,r2,(LC35_LF3)&0xffff
+	lhi	r2,((LC34_LF3)>>16)&0xffff
+	addui	r2,r2,(LC34_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -6564,8 +6549,8 @@ L86_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC36_LF3)>>16)&0xffff
-	addui	r2,r2,(LC36_LF3)&0xffff
+	lhi	r2,((LC35_LF3)>>16)&0xffff
+	addui	r2,r2,(LC35_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6604,8 +6589,8 @@ L87_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC37_LF3)>>16)&0xffff
-	addui	r2,r2,(LC37_LF3)&0xffff
+	lhi	r2,((LC36_LF3)>>16)&0xffff
+	addui	r2,r2,(LC36_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-48(r30)
 	lw	r3,164(r2)
@@ -6629,8 +6614,8 @@ L88_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC37_LF3)>>16)&0xffff
-	addui	r2,r2,(LC37_LF3)&0xffff
+	lhi	r2,((LC36_LF3)>>16)&0xffff
+	addui	r2,r2,(LC36_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-48(r30)
 	lw	r3,164(r2)
@@ -6652,8 +6637,8 @@ L89_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC38_LF3)>>16)&0xffff
-	addui	r2,r2,(LC38_LF3)&0xffff
+	lhi	r2,((LC37_LF3)>>16)&0xffff
+	addui	r2,r2,(LC37_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6689,8 +6674,8 @@ L90_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC39_LF3)>>16)&0xffff
-	addui	r3,r3,(LC39_LF3)&0xffff
+	lhi	r3,((LC38_LF3)>>16)&0xffff
+	addui	r3,r3,(LC38_LF3)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -6715,8 +6700,8 @@ L91_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC39_LF3)>>16)&0xffff
-	addui	r3,r3,(LC39_LF3)&0xffff
+	lhi	r3,((LC38_LF3)>>16)&0xffff
+	addui	r3,r3,(LC38_LF3)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -6748,8 +6733,8 @@ L92_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC40_LF3)>>16)&0xffff
-	addui	r3,r3,(LC40_LF3)&0xffff
+	lhi	r3,((LC39_LF3)>>16)&0xffff
+	addui	r3,r3,(LC39_LF3)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -6774,8 +6759,8 @@ L93_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC40_LF3)>>16)&0xffff
-	addui	r3,r3,(LC40_LF3)&0xffff
+	lhi	r3,((LC39_LF3)>>16)&0xffff
+	addui	r3,r3,(LC39_LF3)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -6805,8 +6790,8 @@ L94_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC41_LF3)>>16)&0xffff
-	addui	r2,r2,(LC41_LF3)&0xffff
+	lhi	r2,((LC40_LF3)>>16)&0xffff
+	addui	r2,r2,(LC40_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6834,8 +6819,8 @@ L95_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC42_LF3)>>16)&0xffff
-	addui	r2,r2,(LC42_LF3)&0xffff
+	lhi	r2,((LC41_LF3)>>16)&0xffff
+	addui	r2,r2,(LC41_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -6874,8 +6859,8 @@ L96_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-24
 	add	r1,r0,r29
-	lhi	r2,((LC43_LF3)>>16)&0xffff
-	addui	r2,r2,(LC43_LF3)&0xffff
+	lhi	r2,((LC42_LF3)>>16)&0xffff
+	addui	r2,r2,(LC42_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-48(r30)
 	sw	4(r1),r2
@@ -6909,8 +6894,8 @@ L97_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-24
 	add	r1,r0,r29
-	lhi	r2,((LC43_LF3)>>16)&0xffff
-	addui	r2,r2,(LC43_LF3)&0xffff
+	lhi	r2,((LC42_LF3)>>16)&0xffff
+	addui	r2,r2,(LC42_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-48(r30)
 	sw	4(r1),r2
@@ -6967,8 +6952,8 @@ L98_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC44_LF3)>>16)&0xffff
-	addui	r2,r2,(LC44_LF3)&0xffff
+	lhi	r2,((LC43_LF3)>>16)&0xffff
+	addui	r2,r2,(LC43_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -6991,8 +6976,8 @@ L100_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC44_LF3)>>16)&0xffff
-	addui	r2,r2,(LC44_LF3)&0xffff
+	lhi	r2,((LC43_LF3)>>16)&0xffff
+	addui	r2,r2,(LC43_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7048,8 +7033,8 @@ L102_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC45_LF3)>>16)&0xffff
-	addui	r2,r2,(LC45_LF3)&0xffff
+	lhi	r2,((LC44_LF3)>>16)&0xffff
+	addui	r2,r2,(LC44_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7074,8 +7059,8 @@ L103_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC45_LF3)>>16)&0xffff
-	addui	r2,r2,(LC45_LF3)&0xffff
+	lhi	r2,((LC44_LF3)>>16)&0xffff
+	addui	r2,r2,(LC44_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7100,8 +7085,8 @@ L104_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC46_LF3)>>16)&0xffff
-	addui	r2,r2,(LC46_LF3)&0xffff
+	lhi	r2,((LC45_LF3)>>16)&0xffff
+	addui	r2,r2,(LC45_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7128,8 +7113,8 @@ L105_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC46_LF3)>>16)&0xffff
-	addui	r2,r2,(LC46_LF3)&0xffff
+	lhi	r2,((LC45_LF3)>>16)&0xffff
+	addui	r2,r2,(LC45_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7156,8 +7141,8 @@ L106_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC47_LF3)>>16)&0xffff
-	addui	r2,r2,(LC47_LF3)&0xffff
+	lhi	r2,((LC46_LF3)>>16)&0xffff
+	addui	r2,r2,(LC46_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7184,8 +7169,8 @@ L107_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC47_LF3)>>16)&0xffff
-	addui	r2,r2,(LC47_LF3)&0xffff
+	lhi	r2,((LC46_LF3)>>16)&0xffff
+	addui	r2,r2,(LC46_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7235,8 +7220,8 @@ L111_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC48_LF3)>>16)&0xffff
-	addui	r2,r2,(LC48_LF3)&0xffff
+	lhi	r2,((LC47_LF3)>>16)&0xffff
+	addui	r2,r2,(LC47_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -7263,8 +7248,8 @@ L112_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC48_LF3)>>16)&0xffff
-	addui	r2,r2,(LC48_LF3)&0xffff
+	lhi	r2,((LC47_LF3)>>16)&0xffff
+	addui	r2,r2,(LC47_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -7479,8 +7464,8 @@ L118_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC49_LF3)>>16)&0xffff
-	addui	r2,r2,(LC49_LF3)&0xffff
+	lhi	r2,((LC48_LF3)>>16)&0xffff
+	addui	r2,r2,(LC48_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -7505,8 +7490,8 @@ L119_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC50_LF3)>>16)&0xffff
-	addui	r2,r2,(LC50_LF3)&0xffff
+	lhi	r2,((LC49_LF3)>>16)&0xffff
+	addui	r2,r2,(LC49_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -7543,8 +7528,8 @@ L120_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC51_LF3)>>16)&0xffff
-	addui	r2,r2,(LC51_LF3)&0xffff
+	lhi	r2,((LC50_LF3)>>16)&0xffff
+	addui	r2,r2,(LC50_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-48(r30)
 	sw	4(r1),r2
@@ -7570,8 +7555,8 @@ L122_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC51_LF3)>>16)&0xffff
-	addui	r2,r2,(LC51_LF3)&0xffff
+	lhi	r2,((LC50_LF3)>>16)&0xffff
+	addui	r2,r2,(LC50_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-48(r30)
 	sw	4(r1),r2
@@ -7602,8 +7587,8 @@ L121_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC52_LF3)>>16)&0xffff
-	addui	r2,r2,(LC52_LF3)&0xffff
+	lhi	r2,((LC51_LF3)>>16)&0xffff
+	addui	r2,r2,(LC51_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7626,8 +7611,8 @@ L124_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC52_LF3)>>16)&0xffff
-	addui	r2,r2,(LC52_LF3)&0xffff
+	lhi	r2,((LC51_LF3)>>16)&0xffff
+	addui	r2,r2,(LC51_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	sw	4(r1),r2
@@ -7662,19 +7647,19 @@ L82_LF3:
 .endproc _ProcessFork
 .data
 .align 2
-LC53_LF3:
+LC52_LF3:
 .ascii "ProcessGetCodeInfo: open of %s failed (%d).\n\000"
 .align 2
-LC54_LF3:
+LC53_LF3:
 .ascii "File descriptor is now %d.\n\000"
 .align 2
-LC55_LF3:
+LC54_LF3:
 .ascii "ProcessGetCodeInfo: read got %d (not %d) bytes from %s\n\000"
 .align 2
-LC56_LF3:
+LC55_LF3:
 .ascii "start:\000"
 .align 2
-LC57_LF3:
+LC56_LF3:
 .ascii "ProcessGetCodeInfo: %s missing start line (not a DLX executable?)\n\000"
 .text
 .align 2
@@ -7717,8 +7702,8 @@ _ProcessGetCodeInfo:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC53_LF3)>>16)&0xffff
-	addui	r2,r2,(LC53_LF3)&0xffff
+	lhi	r2,((LC52_LF3)>>16)&0xffff
+	addui	r2,r2,(LC52_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -7743,8 +7728,8 @@ L142_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC53_LF3)>>16)&0xffff
-	addui	r2,r2,(LC53_LF3)&0xffff
+	lhi	r2,((LC52_LF3)>>16)&0xffff
+	addui	r2,r2,(LC52_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -7773,8 +7758,8 @@ L141_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC54_LF3)>>16)&0xffff
-	addui	r2,r2,(LC54_LF3)&0xffff
+	lhi	r2,((LC53_LF3)>>16)&0xffff
+	addui	r2,r2,(LC53_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	sw	4(r1),r2
@@ -7797,8 +7782,8 @@ L144_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC54_LF3)>>16)&0xffff
-	addui	r2,r2,(LC54_LF3)&0xffff
+	lhi	r2,((LC53_LF3)>>16)&0xffff
+	addui	r2,r2,(LC53_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	sw	4(r1),r2
@@ -7837,8 +7822,8 @@ L145_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC55_LF3)>>16)&0xffff
-	addui	r2,r2,(LC55_LF3)&0xffff
+	lhi	r2,((LC54_LF3)>>16)&0xffff
+	addui	r2,r2,(LC54_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -7865,8 +7850,8 @@ L147_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC55_LF3)>>16)&0xffff
-	addui	r2,r2,(LC55_LF3)&0xffff
+	lhi	r2,((LC54_LF3)>>16)&0xffff
+	addui	r2,r2,(LC54_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -7893,8 +7878,8 @@ L146_LF3:
 	add	r1,r0,r29
 	addi	r2,r30,#-120
 	sw	(r1),r2
-	lhi	r2,((LC56_LF3)>>16)&0xffff
-	addui	r2,r2,(LC56_LF3)&0xffff
+	lhi	r2,((LC55_LF3)>>16)&0xffff
+	addui	r2,r2,(LC55_LF3)&0xffff
 	sw	4(r1),r2
 	jal	_dstrstr
 	nop; delay slot nop
@@ -7917,8 +7902,8 @@ L146_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC57_LF3)>>16)&0xffff
-	addui	r2,r2,(LC57_LF3)&0xffff
+	lhi	r2,((LC56_LF3)>>16)&0xffff
+	addui	r2,r2,(LC56_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -7941,8 +7926,8 @@ L150_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC57_LF3)>>16)&0xffff
-	addui	r2,r2,(LC57_LF3)&0xffff
+	lhi	r2,((LC56_LF3)>>16)&0xffff
+	addui	r2,r2,(LC56_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -8078,19 +8063,19 @@ L140_LF3:
 .endproc _ProcessGetCodeInfo
 .data
 .align 2
-LC58_LF3:
+LC57_LF3:
 .ascii "Got %d bytes at offset %d ...\000"
 .align 2
-LC59_LF3:
+LC58_LF3:
 .ascii " terminated at %d.\n\000"
 .align 2
-LC60_LF3:
+LC59_LF3:
 .ascii "Buffer is \'%s\'\n\000"
 .align 2
-LC61_LF3:
+LC60_LF3:
 .ascii "New address is 0x%x.\n\000"
 .align 2
-LC62_LF3:
+LC61_LF3:
 .ascii "Seeking to %d and returning %d bytes!\n\000"
 .text
 .align 2
@@ -8167,8 +8152,8 @@ L154_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC58_LF3)>>16)&0xffff
-	addui	r2,r2,(LC58_LF3)&0xffff
+	lhi	r2,((LC57_LF3)>>16)&0xffff
+	addui	r2,r2,(LC57_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-220(r30)
 	sw	4(r1),r2
@@ -8193,8 +8178,8 @@ L155_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC58_LF3)>>16)&0xffff
-	addui	r2,r2,(LC58_LF3)&0xffff
+	lhi	r2,((LC57_LF3)>>16)&0xffff
+	addui	r2,r2,(LC57_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-220(r30)
 	sw	4(r1),r2
@@ -8247,8 +8232,8 @@ L158_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC59_LF3)>>16)&0xffff
-	addui	r2,r2,(LC59_LF3)&0xffff
+	lhi	r2,((LC58_LF3)>>16)&0xffff
+	addui	r2,r2,(LC58_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-220(r30)
 	sw	4(r1),r2
@@ -8271,8 +8256,8 @@ L160_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC59_LF3)>>16)&0xffff
-	addui	r2,r2,(LC59_LF3)&0xffff
+	lhi	r2,((LC58_LF3)>>16)&0xffff
+	addui	r2,r2,(LC58_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-220(r30)
 	sw	4(r1),r2
@@ -8295,8 +8280,8 @@ L161_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC60_LF3)>>16)&0xffff
-	addui	r2,r2,(LC60_LF3)&0xffff
+	lhi	r2,((LC59_LF3)>>16)&0xffff
+	addui	r2,r2,(LC59_LF3)&0xffff
 	sw	(r1),r2
 	addi	r2,r30,#-216
 	sw	4(r1),r2
@@ -8319,8 +8304,8 @@ L162_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC60_LF3)>>16)&0xffff
-	addui	r2,r2,(LC60_LF3)&0xffff
+	lhi	r2,((LC59_LF3)>>16)&0xffff
+	addui	r2,r2,(LC59_LF3)&0xffff
 	sw	(r1),r2
 	addi	r2,r30,#-216
 	sw	4(r1),r2
@@ -8401,8 +8386,8 @@ L169_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC61_LF3)>>16)&0xffff
-	addui	r2,r2,(LC61_LF3)&0xffff
+	lhi	r2,((LC60_LF3)>>16)&0xffff
+	addui	r2,r2,(LC60_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	lw	r3,(r2)
@@ -8426,8 +8411,8 @@ L170_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC61_LF3)>>16)&0xffff
-	addui	r2,r2,(LC61_LF3)&0xffff
+	lhi	r2,((LC60_LF3)>>16)&0xffff
+	addui	r2,r2,(LC60_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,8(r30)
 	lw	r3,(r2)
@@ -8598,8 +8583,8 @@ L165_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC62_LF3)>>16)&0xffff
-	addui	r2,r2,(LC62_LF3)&0xffff
+	lhi	r2,((LC61_LF3)>>16)&0xffff
+	addui	r2,r2,(LC61_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-232(r30)
 	lw	r3,-224(r30)
@@ -8628,8 +8613,8 @@ L183_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC62_LF3)>>16)&0xffff
-	addui	r2,r2,(LC62_LF3)&0xffff
+	lhi	r2,((LC61_LF3)>>16)&0xffff
+	addui	r2,r2,(LC61_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-232(r30)
 	lw	r3,-224(r30)
@@ -8658,69 +8643,69 @@ L152_LF3:
 .endproc _ProcessGetFromFile
 .data
 .align 2
-LC63_LF3:
+LC62_LF3:
 .ascii "Got %d arguments.\n\000"
 .align 2
-LC64_LF3:
+LC63_LF3:
 .ascii "Available memory: 0x%x -> 0x%x.\n\000"
 .align 2
-LC65_LF3:
+LC64_LF3:
 .ascii "Argument count is %d.\n\000"
 .align 2
-LC66_LF3:
+LC65_LF3:
 .ascii "Argument %d is %s.\n\000"
 .align 2
-LC67_LF3:
+LC66_LF3:
 .ascii "Converted %s to %d=%s\n\000"
 _buf38_LF3:
 .space 200
 .align 2
-LC68_LF3:
+LC67_LF3:
 .ascii "%08x: %02x%02x%02x%02x\n\000"
 .align 2
-LC69_LF3:
+LC68_LF3:
 .ascii "Option %s not recognized.\n\000"
 .align 2
-LC70_LF3:
+LC69_LF3:
 .ascii "About to initialize queues.\n\000"
 .align 2
-LC71_LF3:
+LC70_LF3:
 .ascii "After initializing queues.\n\000"
 .align 2
-LC72_LF3:
+LC71_LF3:
 .ascii "After initializing memory.\n\000"
 .align 2
-LC73_LF3:
+LC72_LF3:
 .ascii "After initializing processes.\n\000"
 .align 2
-LC74_LF3:
+LC73_LF3:
 .ascii "After initializing shared memory.\n\000"
 .align 2
-LC75_LF3:
+LC74_LF3:
 .ascii "After initializing synchronization tools.\n\000"
 .align 2
-LC76_LF3:
+LC75_LF3:
 .ascii "After initializing keyboard.\n\000"
 .align 2
-LC77_LF3:
+LC76_LF3:
 .ascii "vm\000"
 .align 2
-LC78_LF3:
+LC77_LF3:
 .ascii "VM Descriptor is %d\n\000"
 .align 2
-LC79_LF3:
+LC78_LF3:
 .ascii "calling process_create with two parameters\n\000"
 .align 2
-LC80_LF3:
+LC79_LF3:
 .ascii "ERROR: number of argument (%d) is not valid!\n\000"
 .align 2
-LC81_LF3:
+LC80_LF3:
 .ascii "No user program passed!\n\000"
 .align 2
-LC82_LF3:
+LC81_LF3:
 .ascii "Created processes - about to set timer quantum.\n\000"
 .align 2
-LC83_LF3:
+LC82_LF3:
 .ascii "Set timer quantum to %d, about to run first process.\n\000"
 .text
 .align 2
@@ -8746,8 +8731,8 @@ _main:
 	sb	(r1),r2
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC63_LF3)>>16)&0xffff
-	addui	r2,r2,(LC63_LF3)&0xffff
+	lhi	r2,((LC62_LF3)>>16)&0xffff
+	addui	r2,r2,(LC62_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -8759,8 +8744,8 @@ _main:
 	nop; delay slot nop
 	addi	r29,r29,#-16
 	add	r2,r0,r29
-	lhi	r3,((LC64_LF3)>>16)&0xffff
-	addui	r3,r3,(LC64_LF3)&0xffff
+	lhi	r3,((LC63_LF3)>>16)&0xffff
+	addui	r3,r3,(LC63_LF3)&0xffff
 	sw	(r2),r3
 	lhi	r3,((_lastosaddress)>>16)&0xffff
 	addui	r3,r3,(_lastosaddress)&0xffff
@@ -8772,8 +8757,8 @@ _main:
 	addi	r29,r29,#16
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC65_LF3)>>16)&0xffff
-	addui	r2,r2,(LC65_LF3)&0xffff
+	lhi	r2,((LC64_LF3)>>16)&0xffff
+	addui	r2,r2,(LC64_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,(r30)
 	sw	4(r1),r2
@@ -8793,8 +8778,8 @@ L186_LF3:
 L189_LF3:
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC66_LF3)>>16)&0xffff
-	addui	r2,r2,(LC66_LF3)&0xffff
+	lhi	r2,((LC65_LF3)>>16)&0xffff
+	addui	r2,r2,(LC65_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	sw	4(r1),r2
@@ -8936,8 +8921,8 @@ L197_LF3:
 	addi	r29,r29,#8
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC67_LF3)>>16)&0xffff
-	addui	r2,r2,(LC67_LF3)&0xffff
+	lhi	r2,((LC66_LF3)>>16)&0xffff
+	addui	r2,r2,(LC66_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	addi	r3,r0,#4
@@ -8992,8 +8977,8 @@ L198_LF3:
 	sw	-216(r30),r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC45_LF3)>>16)&0xffff
-	addui	r2,r2,(LC45_LF3)&0xffff
+	lhi	r2,((LC44_LF3)>>16)&0xffff
+	addui	r2,r2,(LC44_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	addi	r3,r0,#4
@@ -9012,8 +8997,8 @@ L198_LF3:
 	addi	r29,r29,#16
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC46_LF3)>>16)&0xffff
-	addui	r2,r2,(LC46_LF3)&0xffff
+	lhi	r2,((LC45_LF3)>>16)&0xffff
+	addui	r2,r2,(LC45_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	addi	r3,r0,#4
@@ -9034,8 +9019,8 @@ L198_LF3:
 	addi	r29,r29,#16
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r2,((LC47_LF3)>>16)&0xffff
-	addui	r2,r2,(LC47_LF3)&0xffff
+	lhi	r2,((LC46_LF3)>>16)&0xffff
+	addui	r2,r2,(LC46_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	addi	r3,r0,#4
@@ -9090,8 +9075,8 @@ L202_LF3:
 L205_LF3:
 	addi	r29,r29,#-24
 	add	r1,r0,r29
-	lhi	r2,((LC68_LF3)>>16)&0xffff
-	addui	r2,r2,(LC68_LF3)&0xffff
+	lhi	r2,((LC67_LF3)>>16)&0xffff
+	addui	r2,r2,(LC67_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-224(r30)
 	lw	r3,-220(r30)
@@ -9166,8 +9151,8 @@ L206_LF3:
 L207_LF3:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC69_LF3)>>16)&0xffff
-	addui	r2,r2,(LC69_LF3)&0xffff
+	lhi	r2,((LC68_LF3)>>16)&0xffff
+	addui	r2,r2,(LC68_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	addi	r3,r0,#4
@@ -9216,8 +9201,8 @@ L191_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC70_LF3)>>16)&0xffff
-	addui	r2,r2,(LC70_LF3)&0xffff
+	lhi	r2,((LC69_LF3)>>16)&0xffff
+	addui	r2,r2,(LC69_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9238,8 +9223,8 @@ L211_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC70_LF3)>>16)&0xffff
-	addui	r2,r2,(LC70_LF3)&0xffff
+	lhi	r2,((LC69_LF3)>>16)&0xffff
+	addui	r2,r2,(LC69_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9263,8 +9248,8 @@ L212_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC71_LF3)>>16)&0xffff
-	addui	r2,r2,(LC71_LF3)&0xffff
+	lhi	r2,((LC70_LF3)>>16)&0xffff
+	addui	r2,r2,(LC70_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9285,8 +9270,8 @@ L213_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC71_LF3)>>16)&0xffff
-	addui	r2,r2,(LC71_LF3)&0xffff
+	lhi	r2,((LC70_LF3)>>16)&0xffff
+	addui	r2,r2,(LC70_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9310,8 +9295,8 @@ L214_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC72_LF3)>>16)&0xffff
-	addui	r2,r2,(LC72_LF3)&0xffff
+	lhi	r2,((LC71_LF3)>>16)&0xffff
+	addui	r2,r2,(LC71_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9332,8 +9317,8 @@ L215_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC72_LF3)>>16)&0xffff
-	addui	r2,r2,(LC72_LF3)&0xffff
+	lhi	r2,((LC71_LF3)>>16)&0xffff
+	addui	r2,r2,(LC71_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9357,8 +9342,8 @@ L216_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC73_LF3)>>16)&0xffff
-	addui	r2,r2,(LC73_LF3)&0xffff
+	lhi	r2,((LC72_LF3)>>16)&0xffff
+	addui	r2,r2,(LC72_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9379,8 +9364,8 @@ L217_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC73_LF3)>>16)&0xffff
-	addui	r2,r2,(LC73_LF3)&0xffff
+	lhi	r2,((LC72_LF3)>>16)&0xffff
+	addui	r2,r2,(LC72_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9404,8 +9389,8 @@ L218_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC74_LF3)>>16)&0xffff
-	addui	r2,r2,(LC74_LF3)&0xffff
+	lhi	r2,((LC73_LF3)>>16)&0xffff
+	addui	r2,r2,(LC73_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9426,8 +9411,8 @@ L219_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC74_LF3)>>16)&0xffff
-	addui	r2,r2,(LC74_LF3)&0xffff
+	lhi	r2,((LC73_LF3)>>16)&0xffff
+	addui	r2,r2,(LC73_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9451,8 +9436,8 @@ L220_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC75_LF3)>>16)&0xffff
-	addui	r2,r2,(LC75_LF3)&0xffff
+	lhi	r2,((LC74_LF3)>>16)&0xffff
+	addui	r2,r2,(LC74_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9473,8 +9458,8 @@ L221_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC75_LF3)>>16)&0xffff
-	addui	r2,r2,(LC75_LF3)&0xffff
+	lhi	r2,((LC74_LF3)>>16)&0xffff
+	addui	r2,r2,(LC74_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9498,8 +9483,8 @@ L222_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC76_LF3)>>16)&0xffff
-	addui	r2,r2,(LC76_LF3)&0xffff
+	lhi	r2,((LC75_LF3)>>16)&0xffff
+	addui	r2,r2,(LC75_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9520,8 +9505,8 @@ L223_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC76_LF3)>>16)&0xffff
-	addui	r2,r2,(LC76_LF3)&0xffff
+	lhi	r2,((LC75_LF3)>>16)&0xffff
+	addui	r2,r2,(LC75_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9553,8 +9538,8 @@ L227_LF3:
 L226_LF3:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC77_LF3)>>16)&0xffff
-	addui	r2,r2,(LC77_LF3)&0xffff
+	lhi	r2,((LC76_LF3)>>16)&0xffff
+	addui	r2,r2,(LC76_LF3)&0xffff
 	sw	(r1),r2
 	addi	r2,r0,#2
 	sw	4(r1),r2
@@ -9577,8 +9562,8 @@ L226_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC78_LF3)>>16)&0xffff
-	addui	r2,r2,(LC78_LF3)&0xffff
+	lhi	r2,((LC77_LF3)>>16)&0xffff
+	addui	r2,r2,(LC77_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	sw	4(r1),r2
@@ -9601,8 +9586,8 @@ L229_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC78_LF3)>>16)&0xffff
-	addui	r2,r2,(LC78_LF3)&0xffff
+	lhi	r2,((LC77_LF3)>>16)&0xffff
+	addui	r2,r2,(LC77_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-12(r30)
 	sw	4(r1),r2
@@ -9736,8 +9721,8 @@ L237_LF3:
 L238_LF3:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC79_LF3)>>16)&0xffff
-	addui	r2,r2,(LC79_LF3)&0xffff
+	lhi	r2,((LC78_LF3)>>16)&0xffff
+	addui	r2,r2,(LC78_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -9955,8 +9940,8 @@ L247_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC80_LF3)>>16)&0xffff
-	addui	r2,r2,(LC80_LF3)&0xffff
+	lhi	r2,((LC79_LF3)>>16)&0xffff
+	addui	r2,r2,(LC79_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-148(r30)
 	sw	4(r1),r2
@@ -9979,8 +9964,8 @@ L248_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC80_LF3)>>16)&0xffff
-	addui	r2,r2,(LC80_LF3)&0xffff
+	lhi	r2,((LC79_LF3)>>16)&0xffff
+	addui	r2,r2,(LC79_LF3)&0xffff
 	sw	(r1),r2
 	lw	r2,-148(r30)
 	sw	4(r1),r2
@@ -10007,8 +9992,8 @@ L231_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC81_LF3)>>16)&0xffff
-	addui	r2,r2,(LC81_LF3)&0xffff
+	lhi	r2,((LC80_LF3)>>16)&0xffff
+	addui	r2,r2,(LC80_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -10029,8 +10014,8 @@ L252_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC81_LF3)>>16)&0xffff
-	addui	r2,r2,(LC81_LF3)&0xffff
+	lhi	r2,((LC80_LF3)>>16)&0xffff
+	addui	r2,r2,(LC80_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -10055,8 +10040,8 @@ L251_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC82_LF3)>>16)&0xffff
-	addui	r2,r2,(LC82_LF3)&0xffff
+	lhi	r2,((LC81_LF3)>>16)&0xffff
+	addui	r2,r2,(LC81_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -10077,8 +10062,8 @@ L254_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC82_LF3)>>16)&0xffff
-	addui	r2,r2,(LC82_LF3)&0xffff
+	lhi	r2,((LC81_LF3)>>16)&0xffff
+	addui	r2,r2,(LC81_LF3)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -10108,8 +10093,8 @@ L255_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC83_LF3)>>16)&0xffff
-	addui	r2,r2,(LC83_LF3)&0xffff
+	lhi	r2,((LC82_LF3)>>16)&0xffff
+	addui	r2,r2,(LC82_LF3)&0xffff
 	sw	(r1),r2
 	lhi	r2,((_processQuantum_LF3)>>16)&0xffff
 	addui	r2,r2,(_processQuantum_LF3)&0xffff
@@ -10134,8 +10119,8 @@ L256_LF3:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC83_LF3)>>16)&0xffff
-	addui	r2,r2,(LC83_LF3)&0xffff
+	lhi	r2,((LC82_LF3)>>16)&0xffff
+	addui	r2,r2,(LC82_LF3)&0xffff
 	sw	(r1),r2
 	lhi	r2,((_processQuantum_LF3)>>16)&0xffff
 	addui	r2,r2,(_processQuantum_LF3)&0xffff
@@ -10344,7 +10329,7 @@ L260_LF3:
 .endproc _get_argument
 .data
 .align 2
-LC84_LF3:
+LC83_LF3:
 .ascii "all args => %s\n\000"
 .text
 .align 2
@@ -10450,8 +10435,8 @@ L271_LF3:
 	sb	(r1),r2
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC84_LF3)>>16)&0xffff
-	addui	r2,r2,(LC84_LF3)&0xffff
+	lhi	r2,((LC83_LF3)>>16)&0xffff
+	addui	r2,r2,(LC83_LF3)&0xffff
 	sw	(r1),r2
 	addi	r2,r30,#-1024
 	sw	4(r1),r2
@@ -12796,32 +12781,23 @@ L32_LF5:
 .data
 .align 2
 LC3_LF5:
-.ascii "PID --- %d inside sem wait with sem->count %d\n\000"
-.align 2
-LC4_LF5:
 .ascii "SemWait: Old interrupt value was 0x%x.\n\000"
 .align 2
-LC5_LF5:
+LC4_LF5:
 .ascii "SemWait: Proc %d waiting on sem %d, count=%d.\n\000"
 .align 2
-LC6_LF5:
+LC5_LF5:
 .ascii "SemWait: putting process %d to sleep\n\000"
 .align 2
-LC7_LF5:
+LC6_LF5:
 .ascii "FATAL ERROR: could not allocate link for semaphore queue in SemWait!\n"
 .ascii "\000"
 .align 2
-LC8_LF5:
+LC7_LF5:
 .ascii "FATAL ERROR: could not insert new link into semaphore waiting queue in"
 .ascii " SemWait!\n\000"
 .align 2
-LC9_LF5:
-.ascii "PID --- %d is put to sleep\n\000"
-.align 2
-LC10_LF5:
-.ascii "PID --- %d count decrement to %d\n\000"
-.align 2
-LC11_LF5:
+LC8_LF5:
 .ascii "SemWait: Proc %d granted permission to continue by sem %d\n\000"
 .text
 .align 2
@@ -12848,22 +12824,6 @@ L41_LF5:
 	jal	_DisableIntrs
 	nop; delay slot nop
 	sw	-16(r30),r1
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-16
-	add	r1,r0,r29
-	lhi	r3,((LC3_LF5)>>16)&0xffff
-	addui	r3,r3,(LC3_LF5)&0xffff
-	sw	(r1),r3
-	sw	4(r1),r2
-	lw	r2,(r30)
-	lw	r3,12(r2)
-	sw	8(r1),r3
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lhi	r2,((_debugstr)>>16)&0xffff
@@ -12879,8 +12839,8 @@ L41_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC4_LF5)>>16)&0xffff
-	addui	r2,r2,(LC4_LF5)&0xffff
+	lhi	r2,((LC3_LF5)>>16)&0xffff
+	addui	r2,r2,(LC3_LF5)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -12903,8 +12863,8 @@ L42_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC4_LF5)>>16)&0xffff
-	addui	r2,r2,(LC4_LF5)&0xffff
+	lhi	r2,((LC3_LF5)>>16)&0xffff
+	addui	r2,r2,(LC3_LF5)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -12931,8 +12891,8 @@ L43_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC5_LF5)>>16)&0xffff
-	addui	r3,r3,(LC5_LF5)&0xffff
+	lhi	r3,((LC4_LF5)>>16)&0xffff
+	addui	r3,r3,(LC4_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -12973,8 +12933,8 @@ L44_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC5_LF5)>>16)&0xffff
-	addui	r3,r3,(LC5_LF5)&0xffff
+	lhi	r3,((LC4_LF5)>>16)&0xffff
+	addui	r3,r3,(LC4_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -13019,8 +12979,8 @@ L45_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC6_LF5)>>16)&0xffff
-	addui	r3,r3,(LC6_LF5)&0xffff
+	lhi	r3,((LC5_LF5)>>16)&0xffff
+	addui	r3,r3,(LC5_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -13045,8 +13005,8 @@ L47_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC6_LF5)>>16)&0xffff
-	addui	r3,r3,(LC6_LF5)&0xffff
+	lhi	r3,((LC5_LF5)>>16)&0xffff
+	addui	r3,r3,(LC5_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -13069,8 +13029,8 @@ L48_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC7_LF5)>>16)&0xffff
-	addui	r2,r2,(LC7_LF5)&0xffff
+	lhi	r2,((LC6_LF5)>>16)&0xffff
+	addui	r2,r2,(LC6_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -13093,8 +13053,8 @@ L49_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC8_LF5)>>16)&0xffff
-	addui	r2,r2,(LC8_LF5)&0xffff
+	lhi	r2,((LC7_LF5)>>16)&0xffff
+	addui	r2,r2,(LC7_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -13103,18 +13063,6 @@ L49_LF5:
 	jal	_exitsim
 	nop; delay slot nop
 L50_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC9_LF5)>>16)&0xffff
-	addui	r3,r3,(LC9_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	add	r2,r0,r29
 	jal	_ProcessSleep
 	nop; delay slot nop
@@ -13128,22 +13076,6 @@ L46_LF5:
 	addi	r2,r3,#-1
 	add	r3,r0,r2
 	sw	12(r1),r3
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-16
-	add	r1,r0,r29
-	lhi	r3,((LC10_LF5)>>16)&0xffff
-	addui	r3,r3,(LC10_LF5)&0xffff
-	sw	(r1),r3
-	sw	4(r1),r2
-	lw	r2,(r30)
-	lw	r3,12(r2)
-	sw	8(r1),r3
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lhi	r2,((_debugstr)>>16)&0xffff
@@ -13163,8 +13095,8 @@ L46_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC11_LF5)>>16)&0xffff
-	addui	r3,r3,(LC11_LF5)&0xffff
+	lhi	r3,((LC8_LF5)>>16)&0xffff
+	addui	r3,r3,(LC8_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -13202,8 +13134,8 @@ L52_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC11_LF5)>>16)&0xffff
-	addui	r3,r3,(LC11_LF5)&0xffff
+	lhi	r3,((LC8_LF5)>>16)&0xffff
+	addui	r3,r3,(LC8_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -13319,27 +13251,21 @@ L54_LF5:
 .endproc _SemHandleWait
 .data
 .align 2
-LC12_LF5:
-.ascii "PID --- %d inside sem signal with sem->count %d\n\000"
-.align 2
-LC13_LF5:
+LC9_LF5:
 .ascii "SemSignal: Process %d Signalling on sem %d, count=%d.\n\000"
 .align 2
-LC14_LF5:
+LC10_LF5:
 .ascii "FATAL ERROR: could not remove link from semaphore queue in SemSignal!\n"
 .ascii "\000"
 .align 2
-LC15_LF5:
+LC11_LF5:
 .ascii "SemSignal: Waking up PID %d.\n\000"
-.align 2
-LC16_LF5:
-.ascii "PID --- %d Woke Up ---- %d\n\000"
 .text
 .align 2
 .proc _SemSignal
 .global _SemSignal
 _SemSignal:
-;  Function 'SemSignal'; 16 bytes of locals, 4 regs to save.
+;  Function 'SemSignal'; 16 bytes of locals, 3 regs to save.
 	sw	-4(r29),r30; push fp
 	add	r30,r0,r29; fp = sp
 	sw	-8(r29),r31; push ret addr
@@ -13347,7 +13273,6 @@ _SemSignal:
 	sw	0(r29),r2
 	sw	4(r29),r3
 	sw	8(r29),r4
-	sw	12(r29),r5
 	lw	r1,(r30)
 	snei	r2,r1,#0
 	bnez	r2,L59_LF5
@@ -13360,22 +13285,6 @@ L59_LF5:
 	jal	_DisableIntrs
 	nop; delay slot nop
 	sw	-16(r30),r1
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-16
-	add	r1,r0,r29
-	lhi	r3,((LC12_LF5)>>16)&0xffff
-	addui	r3,r3,(LC12_LF5)&0xffff
-	sw	(r1),r3
-	sw	4(r1),r2
-	lw	r2,(r30)
-	lw	r3,12(r2)
-	sw	8(r1),r3
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lhi	r2,((_debugstr)>>16)&0xffff
@@ -13395,14 +13304,14 @@ L59_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC13_LF5)>>16)&0xffff
-	addui	r3,r3,(LC13_LF5)&0xffff
+	lhi	r3,((LC9_LF5)>>16)&0xffff
+	addui	r3,r3,(LC9_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
-	lhi	r5,((_sems_LF5)>>16)&0xffff
-	addui	r5,r5,(_sems_LF5)&0xffff
-	sub	r2,r3,r5
+	lhi	r4,((_sems_LF5)>>16)&0xffff
+	addui	r4,r4,(_sems_LF5)&0xffff
+	sub	r2,r3,r4
 	lhi	r3,#-13108
 	addui	r3,r3,#52429
 	movi2fp	f0,r2
@@ -13437,14 +13346,14 @@ L60_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC13_LF5)>>16)&0xffff
-	addui	r3,r3,(LC13_LF5)&0xffff
+	lhi	r3,((LC9_LF5)>>16)&0xffff
+	addui	r3,r3,(LC9_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
-	lhi	r5,((_sems_LF5)>>16)&0xffff
-	addui	r5,r5,(_sems_LF5)&0xffff
-	sub	r2,r3,r5
+	lhi	r4,((_sems_LF5)>>16)&0xffff
+	addui	r4,r4,(_sems_LF5)&0xffff
+	sub	r2,r3,r4
 	lhi	r3,#-13108
 	addui	r3,r3,#52429
 	movi2fp	f0,r2
@@ -13510,8 +13419,8 @@ L61_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC14_LF5)>>16)&0xffff
-	addui	r2,r2,(LC14_LF5)&0xffff
+	lhi	r2,((LC10_LF5)>>16)&0xffff
+	addui	r2,r2,(LC10_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -13542,8 +13451,8 @@ L64_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC15_LF5)>>16)&0xffff
-	addui	r3,r3,(LC15_LF5)&0xffff
+	lhi	r3,((LC11_LF5)>>16)&0xffff
+	addui	r3,r3,(LC11_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -13572,35 +13481,14 @@ L65_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC15_LF5)>>16)&0xffff
-	addui	r3,r3,(LC15_LF5)&0xffff
+	lhi	r3,((LC11_LF5)>>16)&0xffff
+	addui	r3,r3,(LC11_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
 	nop; delay slot nop
 	addi	r29,r29,#8
 L66_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r3,-20(r30)
-	sw	(r1),r3
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-16
-	add	r3,r0,r29
-	lhi	r4,((LC16_LF5)>>16)&0xffff
-	addui	r4,r4,(LC16_LF5)&0xffff
-	sw	(r3),r4
-	sw	4(r3),r2
-	sw	8(r3),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,-20(r30)
@@ -13631,7 +13519,6 @@ L58_LF5:
 	lw	r2,0(r29)
 	lw	r3,4(r29)
 	lw	r4,8(r29)
-	lw	r5,12(r29)
 	lw	r31,-8(r30)
 	add	r29,r0,r30
 	lw	r30,-4(r30)
@@ -13824,7 +13711,7 @@ L71_LF5:
 .endproc _LockCreate
 .data
 .align 2
-LC17_LF5:
+LC12_LF5:
 .ascii "FATAL ERROR: could not initialize lock waiting queue in LockInit!\n\000"
 .text
 .align 2
@@ -13859,8 +13746,8 @@ L80_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC17_LF5)>>16)&0xffff
-	addui	r2,r2,(LC17_LF5)&0xffff
+	lhi	r2,((LC12_LF5)>>16)&0xffff
+	addui	r2,r2,(LC12_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -13886,32 +13773,26 @@ L79_LF5:
 .endproc _LockInit
 .data
 .align 2
-LC18_LF5:
-.ascii "PID --- %d is in LockAcquire\n\000"
-.align 2
-LC19_LF5:
+LC13_LF5:
 .ascii "LockAcquire: Old interrupt value was 0x%x.\n\000"
 .align 2
-LC20_LF5:
+LC14_LF5:
 .ascii "LockAcquire: Proc %d already owns lock %d\n\000"
 .align 2
-LC21_LF5:
+LC15_LF5:
 .ascii "LockAcquire: Proc %d asking for lock %d.\n\000"
 .align 2
-LC22_LF5:
+LC16_LF5:
 .ascii "LockAcquire: putting process %d to sleep\n\000"
 .align 2
-LC23_LF5:
+LC17_LF5:
 .ascii "FATAL ERROR: could not allocate link for lock queue in LockAcquire!\n\000"
 .align 2
-LC24_LF5:
+LC18_LF5:
 .ascii "FATAL ERROR: could not insert new link into lock waiting queue in Lock"
 .ascii "Acquire!\n\000"
 .align 2
-LC25_LF5:
-.ascii "PID --- %d is put to sleep in LockAcquire\n\000"
-.align 2
-LC26_LF5:
+LC19_LF5:
 .ascii "LockAcquire: lock is available, assigning to proc %d\n\000"
 .text
 .align 2
@@ -13926,18 +13807,6 @@ _LockAcquire:
 	sw	0(r29),r2
 	sw	4(r29),r3
 	sw	8(r29),r4
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC18_LF5)>>16)&0xffff
-	addui	r3,r3,(LC18_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	lw	r1,(r30)
 	snei	r2,r1,#0
 	bnez	r2,L83_LF5
@@ -13965,8 +13834,8 @@ L83_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC19_LF5)>>16)&0xffff
-	addui	r2,r2,(LC19_LF5)&0xffff
+	lhi	r2,((LC13_LF5)>>16)&0xffff
+	addui	r2,r2,(LC13_LF5)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -13989,8 +13858,8 @@ L84_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC19_LF5)>>16)&0xffff
-	addui	r2,r2,(LC19_LF5)&0xffff
+	lhi	r2,((LC13_LF5)>>16)&0xffff
+	addui	r2,r2,(LC13_LF5)&0xffff
 	sw	(r1),r2
 	lw	r2,-16(r30)
 	sw	4(r1),r2
@@ -14025,8 +13894,8 @@ L85_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC20_LF5)>>16)&0xffff
-	addui	r3,r3,(LC20_LF5)&0xffff
+	lhi	r3,((LC14_LF5)>>16)&0xffff
+	addui	r3,r3,(LC14_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14064,8 +13933,8 @@ L87_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC20_LF5)>>16)&0xffff
-	addui	r3,r3,(LC20_LF5)&0xffff
+	lhi	r3,((LC14_LF5)>>16)&0xffff
+	addui	r3,r3,(LC14_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14114,8 +13983,8 @@ L86_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC21_LF5)>>16)&0xffff
-	addui	r3,r3,(LC21_LF5)&0xffff
+	lhi	r3,((LC15_LF5)>>16)&0xffff
+	addui	r3,r3,(LC15_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14153,8 +14022,8 @@ L89_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC21_LF5)>>16)&0xffff
-	addui	r3,r3,(LC21_LF5)&0xffff
+	lhi	r3,((LC15_LF5)>>16)&0xffff
+	addui	r3,r3,(LC15_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14196,8 +14065,8 @@ L90_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC22_LF5)>>16)&0xffff
-	addui	r3,r3,(LC22_LF5)&0xffff
+	lhi	r3,((LC16_LF5)>>16)&0xffff
+	addui	r3,r3,(LC16_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -14222,8 +14091,8 @@ L92_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC22_LF5)>>16)&0xffff
-	addui	r3,r3,(LC22_LF5)&0xffff
+	lhi	r3,((LC16_LF5)>>16)&0xffff
+	addui	r3,r3,(LC16_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -14246,8 +14115,8 @@ L93_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC23_LF5)>>16)&0xffff
-	addui	r2,r2,(LC23_LF5)&0xffff
+	lhi	r2,((LC17_LF5)>>16)&0xffff
+	addui	r2,r2,(LC17_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -14271,8 +14140,8 @@ L94_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC24_LF5)>>16)&0xffff
-	addui	r2,r2,(LC24_LF5)&0xffff
+	lhi	r2,((LC18_LF5)>>16)&0xffff
+	addui	r2,r2,(LC18_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -14281,18 +14150,6 @@ L94_LF5:
 	jal	_exitsim
 	nop; delay slot nop
 L95_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC25_LF5)>>16)&0xffff
-	addui	r3,r3,(LC25_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	add	r2,r0,r29
 	jal	_ProcessSleep
 	nop; delay slot nop
@@ -14317,8 +14174,8 @@ L91_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC26_LF5)>>16)&0xffff
-	addui	r3,r3,(LC26_LF5)&0xffff
+	lhi	r3,((LC19_LF5)>>16)&0xffff
+	addui	r3,r3,(LC19_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -14343,8 +14200,8 @@ L97_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC26_LF5)>>16)&0xffff
-	addui	r3,r3,(LC26_LF5)&0xffff
+	lhi	r3,((LC19_LF5)>>16)&0xffff
+	addui	r3,r3,(LC19_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -14453,25 +14310,16 @@ L99_LF5:
 .endproc _LockHandleAcquire
 .data
 .align 2
-LC27_LF5:
-.ascii "Lock got to Release -- %p \n\000"
-.align 2
-LC28_LF5:
+LC20_LF5:
 .ascii "LockRelease: Proc %d releasing lock %d.\n\000"
 .align 2
-LC29_LF5:
+LC21_LF5:
 .ascii "LockRelease: Proc %d does not own lock %d.\n\000"
 .align 2
-LC30_LF5:
-.ascii "PROCESS OS : %d Checking waitting process in lock queue\n\000"
-.align 2
-LC31_LF5:
-.ascii "PROCESS OS : %d found waitting process in lock queue\n\000"
-.align 2
-LC32_LF5:
+LC22_LF5:
 .ascii "FATAL ERROR: could not remove link from lock queue in LockRelease!\n\000"
 .align 2
-LC33_LF5:
+LC23_LF5:
 .ascii "LockRelease: Waking up PID %d, assigning lock.\n\000"
 .text
 .align 2
@@ -14486,16 +14334,6 @@ _LockRelease:
 	sw	0(r29),r2
 	sw	4(r29),r3
 	sw	8(r29),r4
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC27_LF5)>>16)&0xffff
-	addui	r2,r2,(LC27_LF5)&0xffff
-	sw	(r1),r2
-	lw	r2,(r30)
-	sw	4(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	lw	r1,(r30)
 	snei	r2,r1,#0
 	bnez	r2,L104_LF5
@@ -14527,8 +14365,8 @@ L104_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC28_LF5)>>16)&0xffff
-	addui	r3,r3,(LC28_LF5)&0xffff
+	lhi	r3,((LC20_LF5)>>16)&0xffff
+	addui	r3,r3,(LC20_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14566,8 +14404,8 @@ L105_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC28_LF5)>>16)&0xffff
-	addui	r3,r3,(LC28_LF5)&0xffff
+	lhi	r3,((LC20_LF5)>>16)&0xffff
+	addui	r3,r3,(LC20_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14586,31 +14424,6 @@ L105_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#16
 L106_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-16
-	add	r1,r0,r29
-	lhi	r3,((LC28_LF5)>>16)&0xffff
-	addui	r3,r3,(LC28_LF5)&0xffff
-	sw	(r1),r3
-	sw	4(r1),r2
-	lw	r3,(r30)
-	lhi	r4,((_locks_LF5)>>16)&0xffff
-	addui	r4,r4,(_locks_LF5)&0xffff
-	sub	r2,r3,r4
-	lhi	r3,#-13108
-	addui	r3,r3,#52429
-	movi2fp	f0,r2
-	movi2fp	f1,r3
-	mult	f0,f0,f1
-	movfp2i	r2,f0
-	srai	r3,r2,#0x2
-	sw	8(r1),r3
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
 	lw	r2,(r30)
 	add	r3,r0,r29
 	jal	_GetCurrentPid
@@ -14638,8 +14451,8 @@ L106_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC29_LF5)>>16)&0xffff
-	addui	r3,r3,(LC29_LF5)&0xffff
+	lhi	r3,((LC21_LF5)>>16)&0xffff
+	addui	r3,r3,(LC21_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14677,8 +14490,8 @@ L108_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC29_LF5)>>16)&0xffff
-	addui	r3,r3,(LC29_LF5)&0xffff
+	lhi	r3,((LC21_LF5)>>16)&0xffff
+	addui	r3,r3,(LC21_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -14697,31 +14510,6 @@ L108_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#16
 L109_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-16
-	add	r1,r0,r29
-	lhi	r3,((LC29_LF5)>>16)&0xffff
-	addui	r3,r3,(LC29_LF5)&0xffff
-	sw	(r1),r3
-	sw	4(r1),r2
-	lw	r3,(r30)
-	lhi	r4,((_locks_LF5)>>16)&0xffff
-	addui	r4,r4,(_locks_LF5)&0xffff
-	sub	r2,r3,r4
-	lhi	r3,#-13108
-	addui	r3,r3,#52429
-	movi2fp	f0,r2
-	movi2fp	f1,r3
-	mult	f0,f0,f1
-	movfp2i	r2,f0
-	srai	r3,r2,#0x2
-	sw	8(r1),r3
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
 	addi	r1,r0,#-1
 	j	L103_LF5
 	nop; delay slot nop
@@ -14729,18 +14517,6 @@ L107_LF5:
 	lw	r1,(r30)
 	addi	r2,r0,#-1
 	sw	(r1),r2
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC30_LF5)>>16)&0xffff
-	addui	r3,r3,(LC30_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,(r30)
@@ -14752,18 +14528,6 @@ L107_LF5:
 	snei	r2,r1,#0
 	bnez	r2,L110_LF5
 	nop; delay slot nop
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC31_LF5)>>16)&0xffff
-	addui	r3,r3,(LC31_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,(r30)
@@ -14793,8 +14557,8 @@ L107_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC32_LF5)>>16)&0xffff
-	addui	r2,r2,(LC32_LF5)&0xffff
+	lhi	r2,((LC22_LF5)>>16)&0xffff
+	addui	r2,r2,(LC22_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -14825,8 +14589,8 @@ L111_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC33_LF5)>>16)&0xffff
-	addui	r3,r3,(LC33_LF5)&0xffff
+	lhi	r3,((LC23_LF5)>>16)&0xffff
+	addui	r3,r3,(LC23_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -14855,30 +14619,14 @@ L112_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC33_LF5)>>16)&0xffff
-	addui	r3,r3,(LC33_LF5)&0xffff
+	lhi	r3,((LC23_LF5)>>16)&0xffff
+	addui	r3,r3,(LC23_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
 	nop; delay slot nop
 	addi	r29,r29,#8
 L113_LF5:
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r2,-20(r30)
-	sw	(r1),r2
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC33_LF5)>>16)&0xffff
-	addui	r3,r3,(LC33_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,-20(r30)
@@ -14992,19 +14740,19 @@ L114_LF5:
 .endproc _LockHandleRelease
 .data
 .align 2
-LC34_LF5:
+LC24_LF5:
 .ascii "LockTransfer: Proc %d transferring lock %d.\n\000"
 .align 2
-LC35_LF5:
+LC25_LF5:
 .ascii "LockTransfer: Proc %d does not own lock %d.\n\000"
 .align 2
-LC36_LF5:
+LC26_LF5:
 .ascii "LockTransfer: Assigning lock to %d.\n\000"
 .align 2
-LC37_LF5:
+LC27_LF5:
 .ascii "FATAL ERROR: could not remove link from lock queue in LockTransfer!\n\000"
 .align 2
-LC38_LF5:
+LC28_LF5:
 .ascii "LockTransfer: Waking up PID %d.\n\000"
 .text
 .align 2
@@ -15050,8 +14798,8 @@ L119_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC34_LF5)>>16)&0xffff
-	addui	r3,r3,(LC34_LF5)&0xffff
+	lhi	r3,((LC24_LF5)>>16)&0xffff
+	addui	r3,r3,(LC24_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -15089,8 +14837,8 @@ L120_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC34_LF5)>>16)&0xffff
-	addui	r3,r3,(LC34_LF5)&0xffff
+	lhi	r3,((LC24_LF5)>>16)&0xffff
+	addui	r3,r3,(LC24_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -15136,8 +14884,8 @@ L121_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC35_LF5)>>16)&0xffff
-	addui	r3,r3,(LC35_LF5)&0xffff
+	lhi	r3,((LC25_LF5)>>16)&0xffff
+	addui	r3,r3,(LC25_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -15175,8 +14923,8 @@ L123_LF5:
 	add	r2,r0,r1
 	addi	r29,r29,#-16
 	add	r1,r0,r29
-	lhi	r3,((LC35_LF5)>>16)&0xffff
-	addui	r3,r3,(LC35_LF5)&0xffff
+	lhi	r3,((LC25_LF5)>>16)&0xffff
+	addui	r3,r3,(LC25_LF5)&0xffff
 	sw	(r1),r3
 	sw	4(r1),r2
 	lw	r3,(r30)
@@ -15230,8 +14978,8 @@ L122_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC36_LF5)>>16)&0xffff
-	addui	r3,r3,(LC36_LF5)&0xffff
+	lhi	r3,((LC26_LF5)>>16)&0xffff
+	addui	r3,r3,(LC26_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -15260,8 +15008,8 @@ L125_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC36_LF5)>>16)&0xffff
-	addui	r3,r3,(LC36_LF5)&0xffff
+	lhi	r3,((LC26_LF5)>>16)&0xffff
+	addui	r3,r3,(LC26_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -15317,8 +15065,8 @@ L129_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC37_LF5)>>16)&0xffff
-	addui	r2,r2,(LC37_LF5)&0xffff
+	lhi	r2,((LC27_LF5)>>16)&0xffff
+	addui	r2,r2,(LC27_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -15349,8 +15097,8 @@ L131_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC38_LF5)>>16)&0xffff
-	addui	r3,r3,(LC38_LF5)&0xffff
+	lhi	r3,((LC28_LF5)>>16)&0xffff
+	addui	r3,r3,(LC28_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -15379,8 +15127,8 @@ L132_LF5:
 	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC38_LF5)>>16)&0xffff
-	addui	r3,r3,(LC38_LF5)&0xffff
+	lhi	r3,((LC28_LF5)>>16)&0xffff
+	addui	r3,r3,(LC28_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
@@ -15428,17 +15176,6 @@ L118_LF5:
 	jr	r31
 	nop
 .endproc _LockTransfer
-.data
-.align 2
-LC39_LF5:
-.ascii "I am Creating COnditional Variable\n\000"
-.align 2
-LC40_LF5:
-.ascii "&locks[lock] for conditional =>%p\000"
-.align 2
-LC41_LF5:
-.ascii "Succesfully Created Conditional Variable\n\000"
-.text
 .align 2
 .proc _CondCreate
 .global _CondCreate
@@ -15456,14 +15193,6 @@ _CondCreate:
 	jal	_DisableIntrs
 	nop; delay slot nop
 	sw	-16(r30),r1
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC39_LF5)>>16)&0xffff
-	addui	r2,r2,(LC39_LF5)&0xffff
-	sw	(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r1,r0,#0
 	sw	-12(r30),r1
 L135_LF5:
@@ -15522,23 +15251,6 @@ L136_LF5:
 	j	L134_LF5
 	nop; delay slot nop
 L140_LF5:
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC40_LF5)>>16)&0xffff
-	addui	r2,r2,(LC40_LF5)&0xffff
-	sw	(r1),r2
-	lw	r2,(r30)
-	add	r4,r0,r2
-	slli	r3,r4,#0x2
-	add	r3,r3,r2
-	slli	r2,r3,#0x2
-	lhi	r3,((_locks_LF5)>>16)&0xffff
-	addui	r3,r3,(_locks_LF5)&0xffff
-	add	r2,r3,r2
-	sw	4(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	lhi	r1,((_cond_vars_LF5)>>16)&0xffff
 	addui	r1,r1,(_cond_vars_LF5)&0xffff
 	lw	r2,-12(r30)
@@ -15577,14 +15289,6 @@ L140_LF5:
 	j	L134_LF5
 	nop; delay slot nop
 L141_LF5:
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC41_LF5)>>16)&0xffff
-	addui	r2,r2,(LC41_LF5)&0xffff
-	sw	(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	lw	r1,-12(r30)
 	j	L134_LF5
 	nop; delay slot nop
@@ -15601,7 +15305,7 @@ L134_LF5:
 .endproc _CondCreate
 .data
 .align 2
-LC42_LF5:
+LC29_LF5:
 .ascii "FATAL ERROR: could not initialize conditional Variable waiting queue i"
 .ascii "n ConVarInit!\n\000"
 .text
@@ -15637,8 +15341,8 @@ L143_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC42_LF5)>>16)&0xffff
-	addui	r2,r2,(LC42_LF5)&0xffff
+	lhi	r2,((LC29_LF5)>>16)&0xffff
+	addui	r2,r2,(LC29_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -15718,31 +15422,16 @@ L145_LF5:
 .endproc _CondHandleWait
 .data
 .align 2
-LC43_LF5:
-.ascii "OS PROCESS : %d Lock Released\n\000"
-.align 2
-LC44_LF5:
-.ascii "OS PROCESS : %d Inside CondWait\n\000"
-.align 2
-LC45_LF5:
+LC30_LF5:
 .ascii "Cond_Wait: putting process %d to sleep\n\000"
 .align 2
-LC46_LF5:
+LC31_LF5:
 .ascii "FATAL ERROR: could not allocate link for Cond Var queue in Cond_Wait!\n"
 .ascii "\000"
 .align 2
-LC47_LF5:
-.ascii "Putting %d into waiting CondVar waiting Queue\n\000"
-.align 2
-LC48_LF5:
+LC32_LF5:
 .ascii "FATAL ERROR: could not insert new link into Cond Var waiting queue in "
 .ascii "Cond_Wait!\n\000"
-.align 2
-LC49_LF5:
-.ascii "PID --- %d is put to sleep in Cond_Wait\n\000"
-.align 2
-LC50_LF5:
-.ascii "Lock Released\n\000"
 .text
 .align 2
 .proc _CondWait
@@ -15763,7 +15452,21 @@ _CondWait:
 	jal	_LockRelease
 	nop; delay slot nop
 	addi	r29,r29,#8
-	seqi	r2,r1,#1
+	add	r2,r0,r29
+	jal	_DisableIntrs
+	nop; delay slot nop
+	sw	-16(r30),r1
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_debugstr)>>16)&0xffff
+	addui	r2,r2,(_debugstr)&0xffff
+	sw	(r1),r2
+	addi	r2,r0,#115
+	sw	4(r1),r2
+	jal	_dindex
+	nop; delay slot nop
+	addi	r29,r29,#8
+	snei	r2,r1,#0
 	beqz	r2,L150_LF5
 	nop; delay slot nop
 	add	r2,r0,r29
@@ -15771,36 +15474,20 @@ _CondWait:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC43_LF5)>>16)&0xffff
-	addui	r3,r3,(LC43_LF5)&0xffff
+	lhi	r3,((LC30_LF5)>>16)&0xffff
+	addui	r3,r3,(LC30_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
 	nop; delay slot nop
 	addi	r29,r29,#8
 L150_LF5:
-	add	r2,r0,r29
-	jal	_DisableIntrs
-	nop; delay slot nop
-	sw	-16(r30),r1
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC44_LF5)>>16)&0xffff
-	addui	r3,r3,(LC44_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lhi	r2,((_debugstr)>>16)&0xffff
 	addui	r2,r2,(_debugstr)&0xffff
 	sw	(r1),r2
-	addi	r2,r0,#115
+	addi	r2,r0,#43
 	sw	4(r1),r2
 	jal	_dindex
 	nop; delay slot nop
@@ -15813,40 +15500,14 @@ L150_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r2,r0,r29
-	lhi	r3,((LC45_LF5)>>16)&0xffff
-	addui	r3,r3,(LC45_LF5)&0xffff
+	lhi	r3,((LC30_LF5)>>16)&0xffff
+	addui	r3,r3,(LC30_LF5)&0xffff
 	sw	(r2),r3
 	sw	4(r2),r1
 	jal	_printf
 	nop; delay slot nop
 	addi	r29,r29,#8
 L151_LF5:
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((_debugstr)>>16)&0xffff
-	addui	r2,r2,(_debugstr)&0xffff
-	sw	(r1),r2
-	addi	r2,r0,#43
-	sw	4(r1),r2
-	jal	_dindex
-	nop; delay slot nop
-	addi	r29,r29,#8
-	snei	r2,r1,#0
-	beqz	r2,L152_LF5
-	nop; delay slot nop
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC45_LF5)>>16)&0xffff
-	addui	r3,r3,(LC45_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-L152_LF5:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lhi	r2,((_currentPCB)>>16)&0xffff
@@ -15859,12 +15520,12 @@ L152_LF5:
 	sw	-12(r30),r1
 	lw	r1,-12(r30)
 	snei	r2,r1,#0
-	bnez	r2,L153_LF5
+	bnez	r2,L152_LF5
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC46_LF5)>>16)&0xffff
-	addui	r2,r2,(LC46_LF5)&0xffff
+	lhi	r2,((LC31_LF5)>>16)&0xffff
+	addui	r2,r2,(LC31_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -15872,24 +15533,7 @@ L152_LF5:
 	add	r2,r0,r29
 	jal	_exitsim
 	nop; delay slot nop
-L153_LF5:
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r2,-12(r30)
-	lw	r3,12(r2)
-	sw	(r1),r3
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC47_LF5)>>16)&0xffff
-	addui	r3,r3,(LC47_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
+L152_LF5:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,(r30)
@@ -15901,12 +15545,12 @@ L153_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#8
 	snei	r2,r1,#1
-	beqz	r2,L154_LF5
+	beqz	r2,L153_LF5
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC48_LF5)>>16)&0xffff
-	addui	r2,r2,(LC48_LF5)&0xffff
+	lhi	r2,((LC32_LF5)>>16)&0xffff
+	addui	r2,r2,(LC32_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -15914,19 +15558,7 @@ L153_LF5:
 	add	r2,r0,r29
 	jal	_exitsim
 	nop; delay slot nop
-L154_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC49_LF5)>>16)&0xffff
-	addui	r3,r3,(LC49_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
+L153_LF5:
 	add	r2,r0,r29
 	jal	_ProcessSleep
 	nop; delay slot nop
@@ -15945,18 +15577,6 @@ L154_LF5:
 	jal	_LockAcquire
 	nop; delay slot nop
 	addi	r29,r29,#8
-	snei	r2,r1,#0
-	beqz	r2,L155_LF5
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC50_LF5)>>16)&0xffff
-	addui	r2,r2,(LC50_LF5)&0xffff
-	sw	(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-L155_LF5:
 	addi	r1,r0,#1
 	j	L149_LF5
 	nop; delay slot nop
@@ -15983,14 +15603,14 @@ _CondHandleSignal:
 	sw	8(r29),r4
 	lw	r1,(r30)
 	sgti	r2,r1,#31
-	beqz	r2,L157_LF5
+	beqz	r2,L155_LF5
 	nop; delay slot nop
 	addi	r1,r0,#-1
+	j	L154_LF5
+	nop; delay slot nop
 	j	L156_LF5
 	nop; delay slot nop
-	j	L158_LF5
-	nop; delay slot nop
-L157_LF5:
+L155_LF5:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,(r30)
@@ -16006,17 +15626,17 @@ L157_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#8
 	snei	r2,r1,#0
-	bnez	r2,L158_LF5
+	bnez	r2,L156_LF5
 	nop; delay slot nop
 	addi	r1,r0,#-1
-	j	L156_LF5
+	j	L154_LF5
 	nop; delay slot nop
-L159_LF5:
-L158_LF5:
-	addi	r1,r0,#1
-	j	L156_LF5
-	nop; delay slot nop
+L157_LF5:
 L156_LF5:
+	addi	r1,r0,#1
+	j	L154_LF5
+	nop; delay slot nop
+L154_LF5:
 	lw	r2,0(r29)
 	lw	r3,4(r29)
 	lw	r4,8(r29)
@@ -16028,72 +15648,32 @@ L156_LF5:
 .endproc _CondHandleSignal
 .data
 .align 2
-LC51_LF5:
-.ascii "OS PROCESS : %d Inside CondSignal\n\000"
-.align 2
-LC52_LF5:
-.ascii "l = %p\n\000"
-.align 2
-LC53_LF5:
+LC33_LF5:
 .ascii "FATAL ERROR: could not remove link from cond_var queue in CondSignal!\n"
 .ascii "\000"
 .align 2
-LC54_LF5:
+LC34_LF5:
 .ascii "FATAL ERROR: could not allocate link for lock queue in CondSignal!\n\000"
 .align 2
-LC55_LF5:
-.ascii "OS PROCESS : %d Woke Up ---- %d\n\000"
-.align 2
-LC56_LF5:
-.ascii "putting %d in lock %p \n\000"
-.align 2
-LC57_LF5:
+LC35_LF5:
 .ascii "FATAL ERROR: could not insert new link into lock waiting queue in Cond"
 .ascii "Signal!\n\000"
-.align 2
-LC58_LF5:
-.ascii "OS PROCESS : %d Put in lock waiting queue\n\000"
-.align 2
-LC59_LF5:
-.ascii "OS PROCESS : %d Successfully Transferred Lock to %d\n\000"
-.align 2
-LC60_LF5:
-.ascii "OS PROCESS : %d Failed Transferred Lock to %d\n\000"
-.align 2
-LC61_LF5:
-.ascii "OS PROCESS : %d Acquire Lock\n\000"
-.align 2
-LC62_LF5:
-.ascii "OS PROCESS : %d No waiting process in cond_vars queue\n\000"
 .text
 .align 2
 .proc _CondSignal
 .global _CondSignal
 _CondSignal:
-;  Function 'CondSignal'; 16 bytes of locals, 3 regs to save.
+;  Function 'CondSignal'; 16 bytes of locals, 2 regs to save.
 	sw	-4(r29),r30; push fp
 	add	r30,r0,r29; fp = sp
 	sw	-8(r29),r31; push ret addr
-	subui	r29,r29,#40; alloc local storage
+	subui	r29,r29,#32; alloc local storage
 	sw	0(r29),r2
 	sw	4(r29),r3
-	sw	8(r29),r4
 	add	r2,r0,r29
 	jal	_DisableIntrs
 	nop; delay slot nop
 	sw	-20(r30),r1
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC51_LF5)>>16)&0xffff
-	addui	r3,r3,(LC51_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,(r30)
@@ -16103,7 +15683,7 @@ _CondSignal:
 	nop; delay slot nop
 	addi	r29,r29,#8
 	snei	r2,r1,#0
-	bnez	r2,L161_LF5
+	bnez	r2,L159_LF5
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
@@ -16114,16 +15694,6 @@ _CondSignal:
 	nop; delay slot nop
 	addi	r29,r29,#8
 	sw	-12(r30),r1
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC52_LF5)>>16)&0xffff
-	addui	r2,r2,(LC52_LF5)&0xffff
-	sw	(r1),r2
-	lw	r2,-12(r30)
-	sw	4(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,-12(r30)
@@ -16140,12 +15710,12 @@ _CondSignal:
 	nop; delay slot nop
 	addi	r29,r29,#8
 	snei	r2,r1,#1
-	beqz	r2,L162_LF5
+	beqz	r2,L160_LF5
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC53_LF5)>>16)&0xffff
-	addui	r2,r2,(LC53_LF5)&0xffff
+	lhi	r2,((LC33_LF5)>>16)&0xffff
+	addui	r2,r2,(LC33_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -16153,7 +15723,7 @@ _CondSignal:
 	add	r2,r0,r29
 	jal	_exitsim
 	nop; delay slot nop
-L162_LF5:
+L160_LF5:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,-16(r30)
@@ -16164,12 +15734,64 @@ L162_LF5:
 	sw	-12(r30),r1
 	lw	r1,-12(r30)
 	snei	r2,r1,#0
+	bnez	r2,L161_LF5
+	nop; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC34_LF5)>>16)&0xffff
+	addui	r2,r2,(LC34_LF5)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop; delay slot nop
+	addi	r29,r29,#8
+	add	r2,r0,r29
+	jal	_exitsim
+	nop; delay slot nop
+L161_LF5:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	lw	r3,16(r2)
+	addi	r2,r3,#4
+	sw	(r1),r2
+	lw	r2,-12(r30)
+	sw	4(r1),r2
+	jal	_AQueueInsertLast
+	nop; delay slot nop
+	addi	r29,r29,#8
+	snei	r2,r1,#1
+	beqz	r2,L162_LF5
+	nop; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC35_LF5)>>16)&0xffff
+	addui	r2,r2,(LC35_LF5)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop; delay slot nop
+	addi	r29,r29,#8
+	add	r2,r0,r29
+	jal	_exitsim
+	nop; delay slot nop
+L162_LF5:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_currentPCB)>>16)&0xffff
+	addui	r2,r2,(_currentPCB)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_AQueueAllocLink
+	nop; delay slot nop
+	addi	r29,r29,#8
+	sw	-12(r30),r1
+	lw	r1,-12(r30)
+	snei	r2,r1,#0
 	bnez	r2,L163_LF5
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC54_LF5)>>16)&0xffff
-	addui	r2,r2,(LC54_LF5)&0xffff
+	lhi	r2,((LC34_LF5)>>16)&0xffff
+	addui	r2,r2,(LC34_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -16178,46 +15800,6 @@ L162_LF5:
 	jal	_exitsim
 	nop; delay slot nop
 L163_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r3,-16(r30)
-	sw	(r1),r3
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-16
-	add	r3,r0,r29
-	lhi	r4,((LC55_LF5)>>16)&0xffff
-	addui	r4,r4,(LC55_LF5)&0xffff
-	sw	(r3),r4
-	sw	4(r3),r2
-	sw	8(r3),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r2,-16(r30)
-	sw	(r1),r2
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	lw	r1,(r30)
-	lw	r2,16(r1)
-	addi	r1,r2,#4
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC56_LF5)>>16)&0xffff
-	addui	r3,r3,(LC56_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,(r30)
@@ -16234,8 +15816,8 @@ L163_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lhi	r2,((LC57_LF5)>>16)&0xffff
-	addui	r2,r2,(LC57_LF5)&0xffff
+	lhi	r2,((LC35_LF5)>>16)&0xffff
+	addui	r2,r2,(LC35_LF5)&0xffff
 	sw	(r1),r2
 	jal	_printf
 	nop; delay slot nop
@@ -16246,91 +15828,6 @@ L163_LF5:
 L164_LF5:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
-	lw	r2,-16(r30)
-	sw	(r1),r2
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC58_LF5)>>16)&0xffff
-	addui	r3,r3,(LC58_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((_currentPCB)>>16)&0xffff
-	addui	r2,r2,(_currentPCB)&0xffff
-	lw	r3,(r2)
-	sw	(r1),r3
-	jal	_AQueueAllocLink
-	nop; delay slot nop
-	addi	r29,r29,#8
-	sw	-12(r30),r1
-	lw	r1,-12(r30)
-	snei	r2,r1,#0
-	bnez	r2,L165_LF5
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC54_LF5)>>16)&0xffff
-	addui	r2,r2,(LC54_LF5)&0xffff
-	sw	(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-	add	r2,r0,r29
-	jal	_exitsim
-	nop; delay slot nop
-L165_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-16
-	add	r1,r0,r29
-	lhi	r3,((LC56_LF5)>>16)&0xffff
-	addui	r3,r3,(LC56_LF5)&0xffff
-	sw	(r1),r3
-	sw	4(r1),r2
-	lw	r2,(r30)
-	lw	r3,16(r2)
-	addi	r2,r3,#4
-	sw	8(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r2,(r30)
-	lw	r3,16(r2)
-	addi	r2,r3,#4
-	sw	(r1),r2
-	lw	r2,-12(r30)
-	sw	4(r1),r2
-	jal	_AQueueInsertLast
-	nop; delay slot nop
-	addi	r29,r29,#8
-	snei	r2,r1,#1
-	beqz	r2,L166_LF5
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lhi	r2,((LC57_LF5)>>16)&0xffff
-	addui	r2,r2,(LC57_LF5)&0xffff
-	sw	(r1),r2
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-	add	r2,r0,r29
-	jal	_exitsim
-	nop; delay slot nop
-L166_LF5:
-	addi	r29,r29,#-8
-	add	r1,r0,r29
 	lw	r2,(r30)
 	lw	r3,16(r2)
 	sw	(r1),r3
@@ -16339,55 +15836,6 @@ L166_LF5:
 	jal	_LockTransfer
 	nop; delay slot nop
 	addi	r29,r29,#8
-	seqi	r2,r1,#1
-	beqz	r2,L167_LF5
-	nop; delay slot nop
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r3,-16(r30)
-	sw	(r1),r3
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-16
-	add	r3,r0,r29
-	lhi	r4,((LC59_LF5)>>16)&0xffff
-	addui	r4,r4,(LC59_LF5)&0xffff
-	sw	(r3),r4
-	sw	4(r3),r2
-	sw	8(r3),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
-	j	L168_LF5
-	nop; delay slot nop
-L167_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	add	r2,r0,r1
-	addi	r29,r29,#-8
-	add	r1,r0,r29
-	lw	r3,-16(r30)
-	sw	(r1),r3
-	jal	_GetPidFromAddress
-	nop; delay slot nop
-	addi	r29,r29,#8
-	addi	r29,r29,#-16
-	add	r3,r0,r29
-	lhi	r4,((LC60_LF5)>>16)&0xffff
-	addui	r4,r4,(LC60_LF5)&0xffff
-	sw	(r3),r4
-	sw	4(r3),r2
-	sw	8(r3),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#16
-L168_LF5:
 	add	r2,r0,r29
 	jal	_ProcessSleep
 	nop; delay slot nop
@@ -16399,34 +15847,7 @@ L168_LF5:
 	jal	_LockAcquire
 	nop; delay slot nop
 	addi	r29,r29,#8
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC61_LF5)>>16)&0xffff
-	addui	r3,r3,(LC61_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-	j	L169_LF5
-	nop; delay slot nop
-L161_LF5:
-	add	r2,r0,r29
-	jal	_GetCurrentPid
-	nop; delay slot nop
-	addi	r29,r29,#-8
-	add	r2,r0,r29
-	lhi	r3,((LC62_LF5)>>16)&0xffff
-	addui	r3,r3,(LC62_LF5)&0xffff
-	sw	(r2),r3
-	sw	4(r2),r1
-	jal	_printf
-	nop; delay slot nop
-	addi	r29,r29,#8
-L169_LF5:
+L159_LF5:
 	addi	r29,r29,#-8
 	add	r1,r0,r29
 	lw	r2,-20(r30)
@@ -16435,12 +15856,11 @@ L169_LF5:
 	nop; delay slot nop
 	addi	r29,r29,#8
 	addi	r1,r0,#1
-	j	L160_LF5
+	j	L158_LF5
 	nop; delay slot nop
-L160_LF5:
+L158_LF5:
 	lw	r2,0(r29)
 	lw	r3,4(r29)
-	lw	r4,8(r29)
 	lw	r31,-8(r30)
 	add	r29,r0,r30
 	lw	r30,-4(r30)

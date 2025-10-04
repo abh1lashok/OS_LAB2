@@ -12,9 +12,6 @@
 #endif
 
 
-#define NO_OF_PROCESSES 3
-#define NO_OF_PRODUCERS NO_OF_PROCESSES
-#define NO_OF_CONSUMERS NO_OF_PROCESSES
 
 
 
@@ -51,7 +48,7 @@ void main (int argc, char *argv[])
 
   // Convert string from ascii command line argument to integer number
   numprocs = dstrtol(argv[1], NULL, 10); // the "10" means base 10
-  numprocs = numprocs - 1;
+  // numprocs = numprocs - 1;
   Printf("Creating %d processes\n", numprocs);
 
   // Allocate space for a shared memory page, which is exactly 64KB
@@ -68,15 +65,15 @@ void main (int argc, char *argv[])
     Exit();
   }
   
-  Printf("h_mem = %p \n",h_mem);
-  Printf("mc = %p \n",mc);
+  // Printf("h_mem = %p \n",h_mem);
+  // Printf("mc = %p \n",mc);
   // Put some values in the shared memory, to be read by other processes
   mc->numprocs = numprocs;
   mc->really_important_char = 'A';
 
 
-  Printf("&mc->numprocs = %p\n",&(mc->numprocs));
-  Printf("&mc->really_important_char = %p\n",&(mc->really_important_char));
+  // Printf("&mc->numprocs = %p\n",&(mc->numprocs));
+  // Printf("&mc->really_important_char = %p\n",&(mc->really_important_char));
 
   init_cb(&(mc->cb));
   
@@ -142,17 +139,17 @@ void main (int argc, char *argv[])
   // knows how many arguments you are sending.
   for(i=0; i<1; i++) {
     process_create(PRODUCER_TO_RUN, h_mem_str, s_procs_completed_str,lock_str,not_full_str,not_empty_str, NULL);
-    Printf("PRODUCER Process %d created\n", i);
+    // Printf("PRODUCER Process %d created\n", i);
   }
 
   for(i=0; i<numprocs; i++) {
     process_create(CONSUMER_TO_RUN, h_mem_str, s_procs_completed_str,lock_str,not_full_str,not_empty_str, NULL);
-    Printf("CONSUMER Process %d created\n", i);
+    // Printf("CONSUMER Process %d created\n", i);
   }
   
     for(i=1; i<numprocs; i++) {
     process_create(PRODUCER_TO_RUN, h_mem_str, s_procs_completed_str,lock_str,not_full_str,not_empty_str, NULL);
-    Printf("PRODUCER Process %d created\n", i);
+    // Printf("PRODUCER Process %d created\n", i);
   }
 
   // And finally, wait until all spawned processes have finished.

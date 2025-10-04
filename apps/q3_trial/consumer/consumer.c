@@ -65,39 +65,39 @@ void main (int argc, char *argv[])
   cb  = &(mc->cb);
 
   // Printf("spawn_me - %d: Putting Data in\n");
-  while((isxdigit(DATA[j-1]))  || j == 0){
+  while(j < STRING_SIZE){
 
     
     //get lock
     lock_acquire(lock);
     // lock_acquire(prod_cons_lock);
-      Printf("\nCONS - PID %d ---- ACQUIRED LOCK \n",Getpid());
+      // Printf("\nCONS - PID %d ---- ACQUIRED LOCK \n",Getpid());
       if(is_empty(cb)) {
-      Printf("PROD - PID %d ---- Found to be Empty\n", Getpid());
-        if(!cond_wait(not_empty)) Printf("CONS - PID %d ---- Failed Wait for j =  %d \n",Getpid(),j);
+      // Printf("PROD - PID %d ---- Found to be Empty\n", Getpid());
+      cond_wait(not_empty);
+        // if(!cond_wait(not_empty)) Printf("CONS - PID %d ---- Failed Wait for j =  %d \n",Getpid(),j);
       }
       check_item_cb(&DATA[j],cb);
       if (((j == 0)&&(DATA[j] == '0'))||
           ((j != 0)&&((DATA[j] == DATA[j-1] + 1)||(!isxdigit(DATA[j]) && j == 10)))){
                   get_item_cb(&DATA[j],cb);
-                  Printf("CONS - PID %d ---- Got %c from cb \n",Getpid(),DATA[j]);
+                  Printf("Consumer %d removed: %c\n",Getpid(),DATA[j]);
+                  // Printf("CONS - PID %d ---- Got %c from cb \n",Getpid(),DATA[j]);
                   j++;
-                if(cond_signal(not_full)) Printf("CONS - PID %d ---- Successful Signal For j =  %d \n",Getpid(),j-1);
+                  cond_signal(not_full);
+                  
+                // if(cond_signal(not_full)) Printf("CONS - PID %d ---- Successful Signal For j =  %d \n",Getpid(),j-1);
 
           }
-      else {
-        
-        Printf("CONS - PID %d ---- Tried to Pick Wrong Data \n",Getpid());
-
-
-       }
+  
       
 
       
     
   
-    Printf("\n");
-    if(lock_release(lock))Printf("CONS - PID %d ---- RELEASED LOCK \n",Getpid());
+    // Printf("\n");
+    lock_release(lock);
+    // if(lock_release(lock))Printf("CONS - PID %d ---- RELEASED LOCK \n",Getpid());
       }
     // lock_release(prod_cons_lock);
     
@@ -111,12 +111,12 @@ void main (int argc, char *argv[])
 
 lock_acquire(lock);
 
-  Printf("CONS - PID %d ---- Finally Got : ",Getpid());
+  // Printf("CONS - PID %d ---- Got : ",Getpid());
   for(i = 0; i < C_BUFFER_SIZE; i++){
     Printf("%c",DATA[i]);
   }
   Printf("\n");
-  Printf("CONS - PID %d is complete.\n", Getpid());
+  // Printf("CONS - PID %d is complete.\n", Getpid());
 lock_release(lock);
 
 

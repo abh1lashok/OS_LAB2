@@ -23,14 +23,14 @@ void main (int argc, char *argv[])
   N3 = dstrtol(argv[2], NULL, 10);
   
   while(i< N_N3 ){
-  Printf("IN Producer N3 - An N3 molecule is created\n");
-
-  if(sem_signal(N3)) Printf("sem_N3 signal passed\n\n");
+  Printf("An N3 molecule is created\n");
+sem_signal(N3);
+  // if(sem_signal(N3)) Printf("sem_N3 signal passed\n\n");
     i++;
   }
 
   // Signal the semaphore to tell the original process that we're done
-  Printf("PROD - PID %d is complete.\n", Getpid());
+  // Printf("PROD - PID %d is complete.\n", Getpid());
   if(sem_signal(s_procs_completed) != SYNC_SUCCESS) {
     Printf("Bad semaphore s_procs_completed (%d) in ", s_procs_completed); Printf(argv[0]); Printf(", exiting...\n");
     Exit();
